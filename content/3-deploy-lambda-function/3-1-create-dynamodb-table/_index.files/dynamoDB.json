@@ -1,0 +1,214 @@
+{
+  "Books": [
+    {
+      "PutRequest": {
+        "Item": {
+          "id": {
+            "S": "1"
+          },
+          "rv_id": {
+            "N": "0"
+          },
+          "name": {
+            "S": "Let's Go"
+          },
+          "author": {
+            "S": "Alex Edwards"
+          },
+          "category": {
+            "S": "IT"
+          },
+          "price": {
+            "S": "15.8"
+          },
+          "description": {
+            "S": "A step-by-step guide to creating fast, secure web with Go"
+          },
+          "image": {
+            "S": "https://book-image-resize-store.s3.AWS-REGION.amazonaws.com/LetGoBook.png"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "id": {
+            "S": "1"
+          },
+          "rv_id": {
+            "N": "1"
+          },
+          "star": {
+            "N": "5"
+          },
+          "rv": {
+            "S": "Good product quality, nice packaging, reasonable price"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "id": {
+            "S": "1"
+          },
+          "rv_id": {
+            "N": "2"
+          },
+          "star": {
+            "N": "3"
+          },
+          "rv": {
+            "S": "The book is torn, the pages are stuck, the shipping is long"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "id": {
+            "S": "2"
+          },
+          "rv_id": {
+            "N": "0"
+          },
+          "name": {
+            "S": "Docker in Action"
+          },
+          "author": {
+            "S": "Alex Nickoloff"
+          },
+          "category": {
+            "S": "IT"
+          },
+          "price": {
+            "S": "20.9"
+          },
+          "description": {
+            "S": "This book guide to using Docker in real projects"
+          },
+          "image": {
+            "S": "https://book-image-resize-store.s3.AWS-REGION.amazonaws.com/DockerInAction.jpeg"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "id": {
+            "S": "2"
+          },
+          "rv_id": {
+            "N": "1"
+          },
+          "star": {
+            "N": "4"
+          },
+          "rv": {
+            "S": "Blurred ink strokes, the pages are stuck, the shipping is long"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "id": {
+            "S": "3"
+          },
+          "rv_id": {
+            "N": "0"
+          },
+          "name": {
+            "S": "Java"
+          },
+          "author": {
+            "S": "Jame Patterson"
+          },
+          "category": {
+            "S": "IT"
+          },
+          "price": {
+            "S": "10.98"
+          },
+          "description": {
+            "S": "A beginner's guide to learning the basic of Java"
+          },
+          "image": {
+            "S": "https://book-image-resize-store.s3.AWS-REGION.amazonaws.com/Java.jpg"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "id": {
+            "S": "3"
+          },
+          "rv_id": {
+            "N": "1"
+          },
+          "star": {
+            "N": "5"
+          },
+          "rv": {
+            "S": "Easy to understand content, fast shipping"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "id": {
+            "S": "4"
+          },
+          "rv_id": {
+            "N": "0"
+          },
+          "name": {
+            "S": "Learn AWS Serverless Computing: A beginner's guide to using AWS Lambda, Amazon API Gateway, and services from Amazon Web Services"
+          },
+          "author": {
+            "S": "Scott Patterson"
+          },
+          "category": {
+            "S": "IT"
+          },
+          "price": {
+            "S": "41.99"
+          },
+          "description": {
+            "S": "Build, deploy, test, and run cloud-native serverless applications using AWS Lambda and other popular AWS services"
+          },
+          "image": {
+            "S": "https://book-image-resize-store.s3.AWS-REGION.amazonaws.com/PythonCoding.jpeg"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "id": {
+            "S": "4"
+          },
+          "rv_id": {
+            "N": "1"
+          },
+          "star": {
+            "N": "5"
+          },
+          "rv": {
+            "S": "Easy to understand content, fast shipping, free bookmarking. I like it"
+          }
+        }
+      }
+    }
+  ]
+}
