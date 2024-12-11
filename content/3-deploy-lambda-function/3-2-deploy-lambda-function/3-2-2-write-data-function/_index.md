@@ -21,7 +21,7 @@ In this step we create a new Lambda function to write data to DynamoDB on SAM.
       Default: book-image-resize-shop-by-myself
     ```
     ![LambdaCreateFunction](/images/temp/1/38.png?width=90pc)
-    - Next, we will create **BookImageShop** and **BookImageResizeShop** buckets with policies.
+    - Next, we will create **BookImageShop** and **BookImageResizeShop** which saves the image after resizing with CORS rule and policy settings.
     ```
     BookImageShop:
       Type: AWS::S3::Bucket
@@ -253,4 +253,11 @@ In this step we create a new Lambda function to write data to DynamoDB on SAM.
 6. Open [Amazon S3 console](https://s3.console.aws.amazon.com/s3/buckets?region=ap-southeast-1&region=ap-southeast-1).
     - The **book-image-resize-shop-by-myself** and **book-image-shop-by-myself** has been created.
     ![LambdaCreateFunction](/images/temp/1/45.png?width=90pc)
+    - Click on **book-image-resize-shop-by-myself** bucket. At **book-image-resize-shop-by-myself** page.
+      - Click **Permissions** tab.
+      - Check the **Bucket policy** information.
+      ![LambdaCreateFunction](/images/temp/1/46.png?width=90pc)
+      - Scroll down to the bottom, and check the **Cross-origin resource sharing (CORS)**.
+      ![LambdaCreateFunction](/images/temp/1/47.png?width=90pc)
+      
 
