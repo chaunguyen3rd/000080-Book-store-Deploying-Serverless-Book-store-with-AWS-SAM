@@ -10,84 +10,74 @@ In this step, we do some preparations steps to create REST APIs later.
 1. Open **template.yaml** in **fcj-book-shop** folder.
 
 2. Add the following script at the end of the file.
+    - Firstly, we will create **apiType**, **binaryMediaType** and **getOrPostPathPart** parameters.
     ```
-      BookApi:
-        Type: AWS::Serverless::Api
+    apiType:
+      Type: String
+      Default: REGIONAL
+
+    binaryMediaType:
+      Type: String
+      Default: multipart/form-data
+
+    getOrPostPathPart:
+      Type: String
+      Default: books
+
+    deletePathPart:
+      Type: String
+      Default: "{id}"
+    ```
+    ![PrepRestApi](/images/temp/1/61.png?width=90pc)
+    - Next, we will create **BookApi** RestApi and **BookApiResource** Resource.
+    ```
+    BookApi:
+      Type: AWS::ApiGateway::RestApi
+      Properties:
         Name: fcj-serverless-api
-        Properties:
-          StageName: staging
-          Cors: "'*'"      # enable CORS for API
-          DefinitionBody:
-            openapi: 3.0.1
-            info:
-              description: "This is the APIs for book shop web app"
-              version: "1.0.0"
-              title: "API Gateway REST API to Lambda"
-            paths:
-              /books:
-                get:
-                  responses:
-                    "200":
-                      description: 200 response
-                      headers:
-                        Access-Control-Allow-Origin:
-                          type: string
-                  x-amazon-apigateway-integration:
-                    uri:
-                      Fn::Sub: "arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${BooksList.Arn}/invocations"
-                    responses:
-                      default:
-                        statusCode: 200
-                        responseParameters:
-                          method.response.header.Access-Control-Allow-Origin: "'*'"
-                    passthroughBehavior: when_no_match
-                    httpMethod: POST #always POST
-                    type: aws_proxy
-    ```
-    ![CreateGetAPI](/images/1/53.png?width=90pc)
+        EndpointConfiguration:
+          Types:
+            - !Ref apiType
+        BinaryMediaTypes:
+          - !Ref binaryMediaType
 
-  - Add the following script at the end of the **BooksList** function
-    ```
-          Events:
-            ListBook:
-              Type: Api
-              Properties:
-                Path: /books/
-                Method: get
-                RestApiId:
-                  Ref: BookApi
-    ```
-    ![CreateGetAPI](/images/1/54.png?width=90pc)
+    BookApiResource:
+      Type: AWS::ApiGateway::Resource
+      Properties:
+        RestApiId: !Ref BookApi
+        ParentId: !GetAtt BookApi.RootResourceId
+        PathPart: !Ref getOrPostPathPart
 
-2. Run the following command to deploy SAM
+    BookDeleteApiResource:
+      Type: AWS::ApiGateway::Resource
+      Properties:
+        RestApiId: !Ref BookApi
+        ParentId: !Ref BookApiResource
+        PathPart: !Ref deletePathPart
+    ```
+    ![PrepRestApi](/images/temp/1/62.png?width=90pc)
+    
+3. Run the following command to deploy SAM.
     ```
     sam build
+    sam validate
     sam deploy
     ```
-    ![CreateGetAPI](/images/1/55.png?width=90pc)
-{{% notice note %}}
-Enter "y" if asked "BooksList may not have authorization defined, Is this okay? [y/N]: "
-{{% /notice %}}
+    ![PrepRestApi](/images/temp/1/63.png?width=90pc)
 
+4. Open [AWS API Gateway console](https://us-east-1.console.aws.amazon.com/apigateway/home?region=us-east-1).
+    - Click **fcj-serverless-api** REST api.
+    ![PrepRestApi](/images/temp/1/64.png?width=90pc)
+    - At **fcj-serverless-api** resources page.
+      - Click **Resources**.
+      - Select **/books**.
+      - Check **Resource details** information.
+      ![PrepRestApi](/images/temp/1/65.png?width=90pc)
+      - Select **/{id}**.
+      - Check **Resource details** information.
+      ![PrepRestApi](/images/temp/1/66.png?width=90pc)
 
-3. Open Lambda console, click **books_list** function
-    - Click **API Gateway**
-    ![CreateGetAPI](/images/1/56.png?width=90pc)
-
-4. Show API Gateway being interacted with function
-    - Click this API Gateway
-    ![CreateGetAPI](/images/1/57.png?width=90pc)
-
-5. Display resources and GET method
-    ![CreateGetAPI](/images/1/58.png?width=90pc)
-
-6. Click **Stages** on the left menu
-    - Click **staging**
-    - Click **GET**
-    - Record **InvokeURL** of GET method
-    ![CreateGetAPI](/images/1/59.png?width=90pc)
-
-
+So we finish some preparation steps. Next, we will create GET, POST and DELETE api.
 
 
 
