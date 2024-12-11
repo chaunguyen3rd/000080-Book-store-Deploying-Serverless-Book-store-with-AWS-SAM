@@ -76,9 +76,8 @@ In this step, we do some preparations steps to create REST APIs later.
       - Select **/{id}**.
       - Check **Resource details** information.
       ![PrepRestApi](/images/temp/1/66.png?width=90pc)
+      - Click **API settings**.
+      - Check **multipart/form-data** Media type at **Binary media types**.
+      ![PrepRestApi](/images/temp/1/84.png?width=90pc)
 
 So we finish some preparation steps. Next, we will create GET, POST and DELETE api.
-
-
-
-

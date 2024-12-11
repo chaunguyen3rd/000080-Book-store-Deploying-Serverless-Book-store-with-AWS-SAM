@@ -5,85 +5,106 @@ weight : 4
 chapter : false
 pre : " <b> 4.4. </b> "
 ---
-1. Open **template.yaml** file in **fcj-book-shop** folder
-2. Add the following script at the end of the file that create the DELETE method
-      ```
-                /books/{id}:
-                  delete:
-                    responses:
-                      "200":
-                        description: 200 response
-                        headers:
-                          Access-Control-Allow-Origin:
-                            type: string
-                    x-amazon-apigateway-integration:
-                      uri:
-                        Fn::Sub: "arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${BookDelete.Arn}/invocations"
-                      responses:
-                        default:
-                          statusCode: 200
-                          responseParameters:
-                            method.response.header.Access-Control-Allow-Origin: "'*'"
-                      passthroughBehavior: when_no_match
-                      httpMethod: POST #always POST
-                      type: aws_proxy
-      ```
-      ![CreatePostAPI](/images/1/67.png?&width=90pc)
+1. Open **template.yaml** file in **fcj-book-shop** folder.
 
-      - Add the following script at the end of the **BookDelete** function
-      ```
-            Events:
-              DeleteBook:
-                Type: Api
-                Properties:
-                  Path: /books/{id}
-                  Method: delete
-                  RestApiId:
-                    Ref: BookApi
-      ```
-   ![CreatePostAPI](/images/1/68.png?&width=90pc)
+2. Add the following script at the end of the file that creates the **DELETE** method.
+    - Firstly, we need to refresh to create a new deployment version for **POST** Api in a few next steps. Comment **BookApiDeployment** block.
+    ```
+    # BookApiDeployment:
+    #   Type: AWS::ApiGateway::Deployment
+    #   Properties:
+    #     RestApiId: !Ref BookApi
+    #   DependsOn:
+    #     - BookApiGet
 
-2. Run the following command to deploy SAM
-      ```
-      sam build
-      sam deploy --guided
-      ```
-      ![CreatePostAPI](/images/1/72.png?&width=90pc)
-{{% notice note %}}
-Enter "y" if asked "BookDelete may not have authorization defined, Is this okay? [y/N]: "
-{{% /notice %}}
+    BookApiStage:
+      Type: AWS::ApiGateway::Stage
+      Properties:
+        RestApiId: !Ref BookApi
+        StageName: !Ref stage
+        # DeploymentId: !Ref BookApiDeployment
+    ```
+    ![CreateDeleteAPI](/images/temp/1/72.png?&width=90pc)
+    - Run the following command to deploy SAM.
+    ```
+    sam build
+    sam validate
+    sam deploy
+    ```
+    ![CreateDeleteAPI](/images/temp/1/73.png?&width=90pc)
+    - Next, we will create **BookApiDelete** and **BookApiDeleteInvokePermission**.
+    ```
+    BookApiDelete:
+      Type: AWS::ApiGateway::Method
+      Properties:
+        HttpMethod: DELETE
+        RestApiId: !Ref BookApi
+        ResourceId: !Ref BookDeleteApiResource
+        AuthorizationType: NONE
+        Integration:
+          Type: AWS_PROXY
+          IntegrationHttpMethod: POST # For Lambda integrations, you must set the integration method to POST
+          Uri: !Sub >-
+            arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${BookDelete.Arn}/invocations
+          IntegrationResponses:
+            - StatusCode: "200"
+              ResponseParameters:
+                method.response.header.Access-Control-Allow-Origin: "'*'"
+                method.response.header.Access-Control-Allow-Methods: "'DELETE,OPTIONS'"
+                method.response.header.Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'"
+        MethodResponses:
+          - StatusCode: "200"
+            ResponseParameters:
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+              method.response.header.Access-Control-Allow-Methods: "'DELETE,OPTIONS'"
+              method.response.header.Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'"
 
-3. Open **book_delete** function console
-    - Click **API Gateway**
-      ![CreatePostAPI](/images/1/69.png?&width=90pc)
+    BookApiDeleteInvokePermission:
+      Type: AWS::Lambda::Permission
+      Properties:
+        FunctionName: !Ref BookDelete
+        Action: lambda:InvokeFunction
+        Principal: apigateway.amazonaws.com
+        SourceAccount: !Ref "AWS::AccountId"
+    ```
+    ![CreateDeleteAPI](/images/temp/1/79.png?&width=90pc)
+    - Then, we uncomment the codeblock that we commented above.
+    ```
+    BookApiDeployment:
+      Type: AWS::ApiGateway::Deployment
+      Properties:
+        RestApiId: !Ref BookApi
+      DependsOn:
+        - BookApiGet
+        - BookApiCreate
+        - BookApiDelete
 
-4. Show API Gateway being interacted with this function
-    - Click this API Gateway
+    BookApiStage:
+      Type: AWS::ApiGateway::Stage
+      Properties:
+        RestApiId: !Ref BookApi
+        StageName: !Ref stage
+        DeploymentId: !Ref BookApiDeployment
+    ```
+    ![CreateDeleteAPI](/images/temp/1/80.png?&width=90pc)
 
-5. Display the resources and DELETE method
-![CreatePostAPI](/images/1/70.png?&width=90pc)
+3. Run the following command to deploy SAM.
+    ```
+    sam build
+    sam validate
+    sam deploy
+    ```
+    ![CreateDeleteAPI](/images/temp/1/81.png?&width=90pc)
 
-6. Click **Stages** on the left menu
-    - Click **staging**
-    - Click **DELTE**
-    - Record the **InvokeURL** of DELETE method
-![CreatePostAPI](/images/1/71.png?&width=90pc)
-
-7. Add the following script at the end of the **template.yaml** file to API can support Binary Media Types files
-      ```
-            BinaryMediaTypes: 
-              - multipart~1form-data
-      ```
-8. Run the following command to deploy SAM
-      ```
-      sam build
-      sam deploy --guided
-      ```
-      ![CreatePostAPI](/images/1/73.png?&width=90pc)
-
-9. Back to API console
-    - Select **Settings** on the left menu
-    - Scroll down, check if **multipart/form-data** has been added under **Binary Meida Types**
-![CreatePostAPI](/images/1/74.png?&width=90pc)
-
-
+4. Open [AWS API Gateway console](https://us-east-1.console.aws.amazon.com/apigateway/home?region=us-east-1).
+    - Click **fcj-serverless-api** REST api.
+    ![CreateDeleteAPI](/images/temp/1/64.png?width=90pc)
+    - At **fcj-serverless-api** resources page.
+      - Click **Resources**.
+      - Select **DELETE**.
+      - Click **Lambda integration** and check the **book_delete** function.
+      ![CreateDeleteAPI](/images/temp/1/82.png?&width=90pc)
+      - Click **Stages**.
+      - Select **DELETE**.
+      - Copy and save the **Invoke URL**.
+      ![CreateDeleteAPI](/images/temp/1/83.png?&width=90pc)
