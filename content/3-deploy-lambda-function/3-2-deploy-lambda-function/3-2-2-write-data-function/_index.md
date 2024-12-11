@@ -9,7 +9,7 @@ In this step we create a new Lambda function to write data to DynamoDB on SAM.
 
 1. Open **template.yaml** file in **fcj-book-shop** folder.
 
-2. Add the following script at the end of the file to create a Lambda function that writes data to DynamoDB.
+2. Add the following scripts at the end of the file to create a Lambda function that writes data to DynamoDB.
     - Firstly, we will create **bookImageShopBucketName** and **bookImageResizeShopBucketName** parameters.
     ```
     bookImageShopBucketName:

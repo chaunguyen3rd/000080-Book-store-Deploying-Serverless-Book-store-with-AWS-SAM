@@ -8,85 +8,81 @@ pre : " <b> 4.2. </b> "
 1. Open **template.yaml** in **fcj-book-shop** folder.
 
 2. Add the following script at the end of the file creating a REST API and **GET** method.
+    - Firstly, we will create **stage** parameter.
     ```
-      BookApi:
-        Type: AWS::Serverless::Api
-        Name: fcj-serverless-api
-        Properties:
-          StageName: staging
-          Cors: "'*'"      # enable CORS for API
-          DefinitionBody:
-            openapi: 3.0.1
-            info:
-              description: "This is the APIs for book shop web app"
-              version: "1.0.0"
-              title: "API Gateway REST API to Lambda"
-            paths:
-              /books:
-                get:
-                  responses:
-                    "200":
-                      description: 200 response
-                      headers:
-                        Access-Control-Allow-Origin:
-                          type: string
-                  x-amazon-apigateway-integration:
-                    uri:
-                      Fn::Sub: "arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${BooksList.Arn}/invocations"
-                    responses:
-                      default:
-                        statusCode: 200
-                        responseParameters:
-                          method.response.header.Access-Control-Allow-Origin: "'*'"
-                    passthroughBehavior: when_no_match
-                    httpMethod: POST #always POST
-                    type: aws_proxy
+    stage:
+      Type: String
+      Default: staging
     ```
-    ![CreateGetAPI](/images/1/53.png?width=90pc)
+    ![CreateGetAPI](/images/temp/1/67.png?width=90pc)
+    - Next, add the following scripts to create **BookApiGet** method, **BookApiDeployment** deployment, **BookApiStage** stage and **BookApiGetInvokePermission** permission.
+    ```
+    BookApiGet:
+      Type: AWS::ApiGateway::Method
+      Properties:
+        HttpMethod: GET
+        RestApiId: !Ref BookApi
+        ResourceId: !Ref BookApiResource
+        AuthorizationType: NONE
+        Integration:
+          Type: AWS_PROXY
+          IntegrationHttpMethod: POST # For Lambda integrations, you must set the integration method to POST
+          Uri: !Sub >-
+            arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${BooksList.Arn}/invocations
+          IntegrationResponses:
+            - StatusCode: "200"
+              ResponseParameters:
+                method.response.header.Access-Control-Allow-Origin: "'*'"
+                method.response.header.Access-Control-Allow-Methods: "'GET,POST,OPTIONS'"
+                method.response.header.Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'"
+        MethodResponses:
+          - StatusCode: "200"
+            ResponseParameters:
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+              method.response.header.Access-Control-Allow-Methods: "'GET,POST,OPTIONS'"
+              method.response.header.Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'"
 
-  - Add the following script at the end of the **BooksList** function
-    ```
-          Events:
-            ListBook:
-              Type: Api
-              Properties:
-                Path: /books/
-                Method: get
-                RestApiId:
-                  Ref: BookApi
-    ```
-    ![CreateGetAPI](/images/1/54.png?width=90pc)
+    BookApiDeployment:
+      Type: AWS::ApiGateway::Deployment
+      Properties:
+        RestApiId: !Ref BookApi
+      DependsOn:
+        - BookApiGet
 
-2. Run the following command to deploy SAM
+    BookApiStage:
+      Type: AWS::ApiGateway::Stage
+      Properties:
+        RestApiId: !Ref BookApi
+        StageName: !Ref stage
+        DeploymentId: !Ref BookApiDeployment
+
+    BookApiGetInvokePermission:
+      Type: AWS::Lambda::Permission
+      Properties:
+        FunctionName: !Ref BooksList
+        Action: lambda:InvokeFunction
+        Principal: apigateway.amazonaws.com
+        SourceAccount: !Ref "AWS::AccountId"
+    ```
+    ![CreateGetAPI](/images/temp/1/68.png?width=90pc)
+
+3. Run the following command to deploy SAM.
     ```
     sam build
+    sam validate
     sam deploy
     ```
-    ![CreateGetAPI](/images/1/55.png?width=90pc)
-{{% notice note %}}
-Enter "y" if asked "BooksList may not have authorization defined, Is this okay? [y/N]: "
-{{% /notice %}}
+    ![CreateGetAPI](/images/temp/1/69.png?width=90pc)
 
-
-3. Open Lambda console, click **books_list** function
-    - Click **API Gateway**
-    ![CreateGetAPI](/images/1/56.png?width=90pc)
-
-4. Show API Gateway being interacted with function
-    - Click this API Gateway
-    ![CreateGetAPI](/images/1/57.png?width=90pc)
-
-5. Display resources and GET method
-    ![CreateGetAPI](/images/1/58.png?width=90pc)
-
-6. Click **Stages** on the left menu
-    - Click **staging**
-    - Click **GET**
-    - Record **InvokeURL** of GET method
-    ![CreateGetAPI](/images/1/59.png?width=90pc)
-
-
-
-
-
-
+4. Open [AWS API Gateway console](https://us-east-1.console.aws.amazon.com/apigateway/home?region=us-east-1).
+    - Click **fcj-serverless-api** REST api.
+    ![PrepRestApi](/images/temp/1/64.png?width=90pc)
+    - At **fcj-serverless-api** resources page.
+      - Click **Resources**.
+      - Select **GET**.
+      - Click **Lambda integration** and check the **books_list** function.
+      ![CreateGetAPI](/images/temp/1/70.png?width=90pc) 
+      - Click **Stages**.
+      - Select **GET**.
+      - Copy and save the **Invoke URL**.
+      ![CreateGetAPI](/images/temp/1/71.png?width=90pc)
