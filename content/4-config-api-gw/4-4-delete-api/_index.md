@@ -1,12 +1,12 @@
 ---
-title : "Tạo DELETE API"
+title : "Create DELETE API"
 date :  "`r Sys.Date()`" 
-weight : 3
+weight : 4
 chapter : false
-pre : " <b> 4.3. </b> "
+pre : " <b> 4.4. </b> "
 ---
-1. Mở tệp **template.yaml** trong thư mục **fcj-book-shop**
-2. Thêm đoạn script sau vào cuối tệp tạo một method DELETE
+1. Open **template.yaml** file in **fcj-book-shop** folder
+2. Add the following script at the end of the file that create the DELETE method
       ```
                 /books/{id}:
                   delete:
@@ -30,7 +30,7 @@ pre : " <b> 4.3. </b> "
       ```
       ![CreatePostAPI](/images/1/67.png?&width=90pc)
 
-  - Thêm đoạn script sau vào cuối của function **BookDelete** 
+      - Add the following script at the end of the **BookDelete** function
       ```
             Events:
               DeleteBook:
@@ -41,50 +41,49 @@ pre : " <b> 4.3. </b> "
                   RestApiId:
                     Ref: BookApi
       ```
-    ![CreatePostAPI](/images/1/68.png?&width=90pc)
+   ![CreatePostAPI](/images/1/68.png?&width=90pc)
 
-2. Chạy dòng lệnh dưới đây triển khai SAM
-    ```
-    sam build
-    sam deploy --guided
-    ```
-    ![CreatePostAPI](/images/1/72.png?&width=90pc)
+2. Run the following command to deploy SAM
+      ```
+      sam build
+      sam deploy --guided
+      ```
+      ![CreatePostAPI](/images/1/72.png?&width=90pc)
 {{% notice note %}}
-Nhập "y" nếu được hỏi "BookDelete may not have authorization defined, Is this okay? [y/N]: "
+Enter "y" if asked "BookDelete may not have authorization defined, Is this okay? [y/N]: "
 {{% /notice %}}
 
-
-3. Mở bảng điều khiển của function **book_delete**
-    - Ấn vào **API Gateway**
+3. Open **book_delete** function console
+    - Click **API Gateway**
       ![CreatePostAPI](/images/1/69.png?&width=90pc)
 
-4. Hiện thị API Gateway đang được tương tác với function
-    - Ấn vào API Gateway đó
-5. Hiện thị các resource và method DELETE
+4. Show API Gateway being interacted with this function
+    - Click this API Gateway
+
+5. Display the resources and DELETE method
 ![CreatePostAPI](/images/1/70.png?&width=90pc)
 
-6. Chọn tab **Stages** ở menu phía bên trái
-    - Ấn chọn **staging**
-    - Ấn chọn **DELTE**
-    - Ghi lại **InvokeURL** của method DELETE
+6. Click **Stages** on the left menu
+    - Click **staging**
+    - Click **DELTE**
+    - Record the **InvokeURL** of DELETE method
 ![CreatePostAPI](/images/1/71.png?&width=90pc)
 
-7. Thêm đoạn script sau vào cuối tệp **template.yaml** để API hỗ trợ các tệp Binary Media Types
+7. Add the following script at the end of the **template.yaml** file to API can support Binary Media Types files
       ```
             BinaryMediaTypes: 
               - multipart~1form-data
       ```
-8. Chạy dòng lệnh dưới đây triển khai SAM
+8. Run the following command to deploy SAM
       ```
       sam build
       sam deploy --guided
       ```
       ![CreatePostAPI](/images/1/73.png?&width=90pc)
 
-9. Trở lại với bảng điều khiển của API
-    - Chọn **Settings** ở menu phía bên trái
-    - Kéo xuống dưới, kiểm tra xem **multipart/form-data** đã được thêm hay chưa trong phần **Binary Meida Types**
+9. Back to API console
+    - Select **Settings** on the left menu
+    - Scroll down, check if **multipart/form-data** has been added under **Binary Meida Types**
 ![CreatePostAPI](/images/1/74.png?&width=90pc)
-
 
 

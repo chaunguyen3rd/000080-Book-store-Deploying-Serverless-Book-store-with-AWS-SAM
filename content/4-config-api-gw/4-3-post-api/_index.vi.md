@@ -1,9 +1,9 @@
 ---
 title : "Tạo POST API"
 date :  "`r Sys.Date()`" 
-weight : 2
+weight : 3
 chapter : false
-pre : " <b> 4.2. </b> "
+pre : " <b> 4.3. </b> "
 ---
 1. Mở tệp **template.yaml** trong thư mục **fcj-book-shop**
 2. Thêm đoạn script sau vào cuối tệp tạo method POST

@@ -1,12 +1,12 @@
 ---
-title : "Create GET API"
+title : "Tạo GET API"
 date :  "`r Sys.Date()`" 
-weight : 1
+weight : 2
 chapter : false
-pre : " <b> 4.1. </b> "
+pre : " <b> 4.2. </b> "
 ---
-1. Open **template.yaml** in **fcj-book-shop** folder
-2. Add the following script at the end of the file creating a REST API and GET method
+1. Mở tệp **template.yaml** trong thư mục **fcj-book-shop**
+2. Thêm đoạn script sau vào cuối tệp tạo một REST API và GET method
     ```
       BookApi:
         Type: AWS::Serverless::Api
@@ -43,7 +43,7 @@ pre : " <b> 4.1. </b> "
     ```
     ![CreateGetAPI](/images/1/53.png?width=90pc)
 
-  - Add the following script at the end of the **BooksList** function
+  - Thêm đoạn script sau vào cuối của function **BooksList** 
     ```
           Events:
             ListBook:
@@ -56,33 +56,33 @@ pre : " <b> 4.1. </b> "
     ```
     ![CreateGetAPI](/images/1/54.png?width=90pc)
 
-2. Run the following command to deploy SAM
+2. Chạy dòng lệnh dưới đây triển khai SAM
     ```
     sam build
     sam deploy
     ```
     ![CreateGetAPI](/images/1/55.png?width=90pc)
 {{% notice note %}}
-Enter "y" if asked "BooksList may not have authorization defined, Is this okay? [y/N]: "
+Nhập "y" nếu được hỏi "BooksList may not have authorization defined, Is this okay? [y/N]: "
 {{% /notice %}}
 
 
-3. Open Lambda console, click **books_list** function
-    - Click **API Gateway**
+3. Mở bảng điều khiển của function **books_list**
+    - Ấn vào **API Gateway**
     ![CreateGetAPI](/images/1/56.png?width=90pc)
 
-4. Show API Gateway being interacted with function
-    - Click this API Gateway
+4. Hiện thị API Gateway đang được tương tác với function
+    - Ấn vào API Gateway đó
     ![CreateGetAPI](/images/1/57.png?width=90pc)
 
-5. Display resources and GET method
+5. Hiện thị các resource và GET method
     ![CreateGetAPI](/images/1/58.png?width=90pc)
 
-6. Click **Stages** on the left menu
-    - Click **staging**
-    - Click **GET**
-    - Record **InvokeURL** of GET method
-    ![CreateGetAPI](/images/1/59.png?width=90pc)
+6. Chọn tab **Stages** ở menu phía bên trái
+    - Ấn chọn **staging**
+    - Ấn chọn **GET**
+    - Ghi lại **InvokeURL** của method GET
+![CreateGetAPI](/images/1/59.png?width=90pc)
 
 
 

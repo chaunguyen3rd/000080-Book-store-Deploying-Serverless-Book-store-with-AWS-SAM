@@ -1,9 +1,9 @@
 ---
 title : "Create POST API"
 date :  "`r Sys.Date()`" 
-weight : 2
+weight : 3
 chapter : false
-pre : " <b> 4.2. </b> "
+pre : " <b> 4.3. </b> "
 ---
 1. Open **template.yaml** file in **fcj-book-shop** folder
 2. Add the following script at the end of the file that create the POST method

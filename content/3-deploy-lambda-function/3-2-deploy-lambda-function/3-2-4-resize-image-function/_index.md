@@ -107,6 +107,11 @@ If you create S3 bucket names that are different from the ones in the lab, pleas
     ![LambdaResizeFunction](/images/temp/1/57.png?width=90pc)
     - At **resize_image** page.
       - Click **Configuration** tab.
+      - Select **Triggers** on the left menu.
+      - Click **Details**.
+      - Check **s3:ObjectCreated** detail that we created before.
+      ![LambdaResizeFunction](/images/temp/1/60.png?width=90pc)
+      - Click **Configuration** tab.
       - Select **Permissions** on the left menu.
       - Click on the role that the function is executing.
       ![LambdaResizeFunction](/images/temp/1/58.png?width=90pc)
