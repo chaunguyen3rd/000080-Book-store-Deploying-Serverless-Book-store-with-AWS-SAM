@@ -106,7 +106,7 @@ We will create a Lambda function that reads all the data in the DynamoDB table.
     ```
     ![LambdaListFunction](/images/temp/1/34.png?width=90pc)
 
-5. Open [AWS Lambda console](https://ap-southeast-1.console.aws.amazon.com/lambda/home?region=ap-southeast-1#/functions). 
+5. Open [AWS Lambda console](https://ap-southeast-1.console.aws.amazon.com/lambda/home?region=ap-southeast-1#/functions).
     - Click **books_list** function created.
     ![LambdaListFunction](/images/temp/1/35.png?width=90pc)
     - At **books_list** page.
