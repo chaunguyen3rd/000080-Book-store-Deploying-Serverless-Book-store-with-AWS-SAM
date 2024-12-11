@@ -7,7 +7,7 @@ pre : " <b> 4.2. </b> "
 ---
 1. Open **template.yaml** in **fcj-book-shop** folder.
 
-2. Add the following script at the end of the file creating a REST API and **GET** method.
+2. Add the following script at the end of the file that creates a REST API and **GET** method.
     - Firstly, we will create **stage** parameter.
     ```
     stage:

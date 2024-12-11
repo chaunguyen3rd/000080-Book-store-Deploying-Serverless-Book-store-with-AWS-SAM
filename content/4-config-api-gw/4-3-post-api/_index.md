@@ -5,72 +5,105 @@ weight : 3
 chapter : false
 pre : " <b> 4.3. </b> "
 ---
-1. Open **template.yaml** file in **fcj-book-shop** folder
-2. Add the following script at the end of the file that create the POST method
-      ```
-                  post:
-                    responses:
-                      "200":
-                        description: 200 response
-                        headers:
-                          Access-Control-Allow-Origin:
-                            type: string
-                    x-amazon-apigateway-integration:
-                      uri:
-                        Fn::Sub: "arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${BookCreate.Arn}/invocations"
-                      responses:
-                        default:
-                          statusCode: 200
-                          responseParameters:
-                            method.response.header.Access-Control-Allow-Origin: "'*'"
-                      passthroughBehavior: when_no_match
-                      httpMethod: POST #always POST
-                      type: aws_proxy
-      ```
-      ![CreatePostAPI](/images/1/60.png?&width=90pc)
+1. Open **template.yaml** file in **fcj-book-shop** folder.
 
-- Add the following script at the end of the **BookCreate** function
+2. Add the following script at the end of the file that creates the **POST** method.
+    - Firstly, we need to refresh to create a new deployment version for **POST** Api in a few next steps. Comment **BookApiDeployment** block.
     ```
-          Events:
-            CreateBook:
-              Type: Api
-              Properties:
-                Path: /books/
-                Method: post
-                RestApiId:
-                  Ref: BookApi
-    ```
-    ![CreatePostAPI](/images/1/61.png?&width=90pc)
+    # BookApiDeployment:
+    #   Type: AWS::ApiGateway::Deployment
+    #   Properties:
+    #     RestApiId: !Ref BookApi
+    #   DependsOn:
+    #     - BookApiGet
 
-2. Run the following command to deploy SAM
+    BookApiStage:
+      Type: AWS::ApiGateway::Stage
+      Properties:
+        RestApiId: !Ref BookApi
+        StageName: !Ref stage
+        # DeploymentId: !Ref BookApiDeployment
+    ```
+    ![CreatePostAPI](/images/temp/1/72.png?&width=90pc)
+    - Run the following command to deploy SAM.
     ```
     sam build
-    sam deploy --guided
+    sam validate
+    sam deploy
     ```
-    ![CreatePostAPI](/images/1/62.png?&width=90pc)   
-{{% notice note %}}
-Enter "y" if asked "BookCreate may not have authorization defined, Is this okay? [y/N]:"
-{{% /notice %}}
+    ![CreatePostAPI](/images/temp/1/73.png?&width=90pc)
+    - Next, we will create **BookApiCreate** and **BookApiCreateInvokePermission**.
+    ```
+    BookApiCreate:
+      Type: AWS::ApiGateway::Method
+      Properties:
+        HttpMethod: POST
+        RestApiId: !Ref BookApi
+        ResourceId: !Ref BookApiResource
+        AuthorizationType: NONE
+        Integration:
+          Type: AWS_PROXY
+          IntegrationHttpMethod: POST # For Lambda integrations, you must set the integration method to POST
+          Uri: !Sub >-
+            arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${BookCreate.Arn}/invocations
+          IntegrationResponses:
+            - StatusCode: "200"
+              ResponseParameters:
+                method.response.header.Access-Control-Allow-Origin: "'*'"
+                method.response.header.Access-Control-Allow-Methods: "'GET,POST,OPTIONS'"
+                method.response.header.Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'"
+        MethodResponses:
+          - StatusCode: "200"
+            ResponseParameters:
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+              method.response.header.Access-Control-Allow-Methods: "'GET,POST,OPTIONS'"
+              method.response.header.Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'"
 
-3. Open **book_create** function console
-    - Click **API Gateway**
-    ![CreatePostAPI](/images/1/63.png?&width=90pc)
+    BookApiCreateInvokePermission:
+      Type: AWS::Lambda::Permission
+      Properties:
+        FunctionName: !Ref BookCreate
+        Action: lambda:InvokeFunction
+        Principal: apigateway.amazonaws.com
+        SourceAccount: !Ref "AWS::AccountId"
+    ```
+    ![CreatePostAPI](/images/temp/1/74.png?&width=90pc)
+    - Then, we uncomment the codeblock that we commented above.
+    ```
+    BookApiDeployment:
+      Type: AWS::ApiGateway::Deployment
+      Properties:
+        RestApiId: !Ref BookApi
+      DependsOn:
+        - BookApiGet
+        - BookApiCreate
 
-4. Show API Gateway being interacted with this function
-    - Click this API Gateway
-    ![CreatePostAPI](/images/1/64.png?&width=90pc)
+    BookApiStage:
+      Type: AWS::ApiGateway::Stage
+      Properties:
+        RestApiId: !Ref BookApi
+        StageName: !Ref stage
+        DeploymentId: !Ref BookApiDeployment
+    ```
+    ![CreatePostAPI](/images/temp/1/75.png?&width=90pc)
 
-5. Display the resources and POST method
-    ![CreatePostAPI](/images/1/65.png?&width=90pc)
+3. Run the following command to deploy SAM.
+    ```
+    sam build
+    sam validate
+    sam deploy
+    ```
+    ![CreatePostAPI](/images/temp/1/76.png?&width=90pc)
 
-6. Click **Stages** on the left menu
-    - Click **staging**
-    - Click **POST**
-    - Record **InvokeURL** of POST method
-    ![CreatePostAPI](/images/1/66.png?&width=90pc)
-
-
-
-
-
-
+4. Open [AWS API Gateway console](https://us-east-1.console.aws.amazon.com/apigateway/home?region=us-east-1).
+    - Click **fcj-serverless-api** REST api.
+    ![PrepRestApi](/images/temp/1/64.png?width=90pc)
+    - At **fcj-serverless-api** resources page.
+      - Click **Resources**.
+      - Select **POST**.
+      - Click **Lambda integration** and check the **book_create** function.
+      ![CreatePostAPI](/images/temp/1/77.png?&width=90pc)
+      - Click **Stages**.
+      - Select **POST**.
+      - Copy and save the **Invoke URL**.
+      ![CreatePostAPI](/images/temp/1/78.png?&width=90pc)
