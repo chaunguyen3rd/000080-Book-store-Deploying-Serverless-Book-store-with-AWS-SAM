@@ -49,7 +49,7 @@ In this step, we will create an S3 bucket with Static web hosting enabled and pu
                 - - "arn:aws:s3:::"
                   - !Ref FcjBookShop
                   - /*
-      ```
+    ```
 
     The above script defines an S3 bucket is  **fcj-book-shop** with **FcjBookShopPolicy** policy - allow public access.
     ![CreateS3Bucket](/images/temp/1/14.png?width=90pc)
@@ -65,7 +65,7 @@ In this step, we will create an S3 bucket with Static web hosting enabled and pu
       ```
       ![CreateS3Bucket](/images/temp/1/15.png?width=90pc)
 
-    - To deploy SAM
+    - To deploy SAM.
       ```
       sam deploy --guided
       ```
@@ -103,13 +103,13 @@ In this step, we will create an S3 bucket with Static web hosting enabled and pu
 
 8. Download **fcj-serverless-frontend** code to your device
     - Open a terminal on your computer at the directory where you want to save the source code.
-    - Copy the below command.
-        ```
-        git clone https://github.com/AWS-First-Cloud-Journey/FCJ-Serverless-Workshop.git
-        cd FCJ-Serverless-Workshop
-        yarn
-        yarn build
-        ```
+    - Copy and run the below command.
+      ```
+      git clone https://github.com/AWS-First-Cloud-Journey/FCJ-Serverless-Workshop.git
+      cd FCJ-Serverless-Workshop
+      yarn
+      yarn build
+      ```
 9. We have finished building the front-end. Next, execute the following command to upload the **build** folder to S3.
     ```
     aws s3 cp build s3://fcj-book-shop-by-myself --recursive
