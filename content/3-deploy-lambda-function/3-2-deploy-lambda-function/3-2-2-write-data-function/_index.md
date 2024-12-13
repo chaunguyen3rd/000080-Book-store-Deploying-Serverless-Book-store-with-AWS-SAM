@@ -109,7 +109,7 @@ In this step we create a new Lambda function to write data to DynamoDB on SAM.
   If you create S3 bucket name is different from the one in the lab, please update **Policies | Resources** of **book_create** function with that name.
   {{% /notice %}}
 
-3. The directory structure is as follows:
+3. The directory structure is as follows.
     ```
     fcj-book-shop
     ├── fcj-book-shop
@@ -259,5 +259,3 @@ In this step we create a new Lambda function to write data to DynamoDB on SAM.
       ![LambdaCreateFunction](/images/temp/1/46.png?width=90pc)
       - Scroll down to the bottom, and check the **Cross-origin resource sharing (CORS)**.
       ![LambdaCreateFunction](/images/temp/1/47.png?width=90pc)
-      
-
