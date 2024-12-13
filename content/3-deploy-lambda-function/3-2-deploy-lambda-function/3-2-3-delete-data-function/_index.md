@@ -41,7 +41,7 @@ We will create a Lambda function that deletes all items with the specified parti
                       - !Ref BookImageResizeShop
                       - /*
     ```
-    ![LambdaDeleteFunction](/images/temp/1/48.png?width=90pc)
+    ![LambdaDeleteFunction](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/48.png?width=90pc)
 
 3. The directory structure is as follows.
     ```
@@ -128,16 +128,16 @@ We will create a Lambda function that deletes all items with the specified parti
     sam validate
     sam deploy
     ```
-    ![LambdaDeleteFunction](/images/temp/1/49.png?width=90pc)
+    ![LambdaDeleteFunction](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/49.png?width=90pc)
 
 5. Open [AWS Lambda console](https://ap-southeast-1.console.aws.amazon.com/lambda/home?region=ap-southeast-1#/functions).
     - Click **book_delete** function created.
-    ![LambdaDeleteFunction](/images/temp/1/50.png?width=90pc)
+    ![LambdaDeleteFunction](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/50.png?width=90pc)
     - At **book_delete** page.
       - Click **Configuration** tab.
       - Select **Permissions** on the left menu.
       - Click on the role that the function is executing.
-      ![LambdaDeleteFunction](/images/temp/1/51.png?width=90pc)
+      ![LambdaDeleteFunction](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/51.png?width=90pc)
     - At **fcj-book-shop-BookDeleteRole-...** page.
       - Check the permissions granted to the function.
-      ![LambdaDeleteFunction](/images/temp/1/52.png?width=90pc)
+      ![LambdaDeleteFunction](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/52.png?width=90pc)

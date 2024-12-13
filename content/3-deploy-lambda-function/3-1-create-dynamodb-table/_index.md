@@ -13,7 +13,7 @@ pre : " <b> 3.1 </b> "
       Type: String
       Default: Books
     ```
-    ![CreateDynamoDBTable](/images/temp/1/26.png?width=90pc)
+    ![CreateDynamoDBTable](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/26.png?width=90pc)
 
     ```
     BooksTable:
@@ -43,7 +43,7 @@ pre : " <b> 3.1 </b> "
             Projection:
               ProjectionType: ALL
     ```
-    ![CreateDynamoDBTable](/images/temp/1/27.png?width=90pc)
+    ![CreateDynamoDBTable](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/27.png?width=90pc)
     - The above script creates the **Books** table in DynamoDB with the partition key of id, the sort key of rv_id and a Local Secondary Index.
 
 3. Run the following command to deploy SAM.
@@ -52,17 +52,17 @@ pre : " <b> 3.1 </b> "
     sam validate
     sam deploy
     ```
-    ![CreateDynamoDBTable](/images/temp/1/28.png?width=90pc)
+    ![CreateDynamoDBTable](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/28.png?width=90pc)
 
 4. Back to DynamoDB console. At **Tables** page.
     - Click **Books** table.
-    ![CreateDynamoDBTable](/images/temp/1/29.png?width=90pc)
+    ![CreateDynamoDBTable](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/29.png?width=90pc)
     - At **Books** page.
       - Check information of this table.
-      ![CreateDynamoDBTable](/images/temp/1/30.png?width=90pc)
+      ![CreateDynamoDBTable](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/30.png?width=90pc)
       - Click **Indexes** tab.
       - Check the **Local secondary indexes** information.
-      ![CreateDynamoDBTable](/images/temp/1/31.png?width=90pc)
+      ![CreateDynamoDBTable](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/31.png?width=90pc)
       So you have created the **Books** table with the Local secondary index **name-index**.    
 
 5. To add data to the table, you can download the below file. Then, open file and replace all **AWS-REGION** with the region that create S3 bucket - **book-image-resize-shop-by-myself**, such as: `us-east-1`.
@@ -72,4 +72,4 @@ pre : " <b> 3.1 </b> "
     ```
     aws dynamodb batch-write-item --request-items file://dynamoDB.json
     ```
-    ![CreateDynamoDBTable](/images/temp/1/32.png?width=90pc)
+    ![CreateDynamoDBTable](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/32.png?width=90pc)

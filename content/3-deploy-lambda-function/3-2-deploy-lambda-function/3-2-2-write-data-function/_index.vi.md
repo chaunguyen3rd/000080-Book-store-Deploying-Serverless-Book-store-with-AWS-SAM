@@ -20,7 +20,7 @@ Trong bước này, chúng ta sẽ tạo một hàm Lambda mới để ghi dữ 
       Type: String
       Default: book-image-resize-shop-by-myself
     ```
-    ![LambdaCreateFunction](/images/temp/1/38.png?width=90pc)
+    ![LambdaCreateFunction](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/38.png?width=90pc)
     - Tiếp theo, chúng ta sẽ tạo **BookImageShop** và **BookImageResizeShop** để lưu hình ảnh sau khi thay đổi kích thước bằng quy tắc CORS và cài đặt chính sách.
     ```
     BookImageShop:
@@ -71,7 +71,7 @@ Trong bước này, chúng ta sẽ tạo một hàm Lambda mới để ghi dữ 
                   - !Ref BookImageResizeShop
                   - /*
     ```
-    ![LambdaCreateFunction](/images/temp/1/39.png?width=90pc)
+    ![LambdaCreateFunction](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/39.png?width=90pc)
     - Sau đó, chúng ta thêm các tập lệnh sau để tạo hàm **BookCreate**.
     ```
     BookCreate:
@@ -103,7 +103,7 @@ Trong bước này, chúng ta sẽ tạo một hàm Lambda mới để ghi dữ 
                       - !Ref BookImageShop
                       - /*
     ```
-    ![LambdaCreateFunction](/images/temp/1/40.png?width=90pc)
+    ![LambdaCreateFunction](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/40.png?width=90pc)
     
   {{% notice warning %}}
   Nếu tên S3 bucket bạn tạo khác với tên trong bài lab, vui lòng cập nhật **Chính sách | Tài nguyên** của hàm **book_create** bằng tên đó.
@@ -236,26 +236,26 @@ Trong bước này, chúng ta sẽ tạo một hàm Lambda mới để ghi dữ 
     sam validate
     sam deploy
     ```
-    ![LambdaCreateFunction](/images/temp/1/41.png?width=90pc)
+    ![LambdaCreateFunction](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/41.png?width=90pc)
 
 5. Mở [AWS Lambda console](https://ap-southeast-1.console.aws.amazon.com/lambda/home?region=ap-southeast-1#/functions).
     - Nhấp vào hàm **book_create** đã được tạo.
-    ![LambdaCreateFunction](/images/temp/1/42.png?width=90pc)
+    ![LambdaCreateFunction](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/42.png?width=90pc)
     - Tại trang **book_create**.
       - Nhấp vào tab **Configuration**.
       - Chọn **Permissions** trên menu bên trái.
       - Nhấp vào vai trò mà hàm đang thực thi.     
-      ![LambdaCreateFunction](/images/temp/1/43.png?width=90pc)
+      ![LambdaCreateFunction](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/43.png?width=90pc)
     - Tại trang **fcj-book-shop-BookCreateRole-...**.
       - Kiểm tra các quyền đã được cấp cho hàm.     
-      ![LambdaCreateFunction](/images/temp/1/44.png?width=90pc)
+      ![LambdaCreateFunction](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/44.png?width=90pc)
 
 6. Mở [Amazon S3 console](https://s3.console.aws.amazon.com/s3/buckets?region=ap-southeast-1&region=ap-southeast-1).
     - Các bucket **book-image-resize-shop-by-myself** và **book-image-shop-by-myself** đã được tạo.
-    ![LambdaCreateFunction](/images/temp/1/45.png?width=90pc)
+    ![LambdaCreateFunction](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/45.png?width=90pc)
     - Nhấp vào bucket **book-image-resize-shop-by-myself**. Tại trang **book-image-resize-shop-by-myself**.
       - Nhấp vào tab **Permissions**.
       - Kiểm tra thông tin **Bucket policy**.     
-      ![LambdaCreateFunction](/images/temp/1/46.png?width=90pc)
+      ![LambdaCreateFunction](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/46.png?width=90pc)
       - Cuộn xuống cuối trang và kiểm tra **Chia sẻ tài nguyên giữa các nguồn (CORS)**.     
-      ![LambdaCreateFunction](/images/temp/1/47.png?width=90pc)
+      ![LambdaCreateFunction](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/47.png?width=90pc)

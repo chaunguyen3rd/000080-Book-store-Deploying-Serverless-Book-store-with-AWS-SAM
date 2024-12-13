@@ -14,7 +14,7 @@ pre : " <b> 4.2. </b> "
       Type: String
       Default: staging
     ```
-    ![CreateGetAPI](/images/temp/1/67.png?width=90pc)
+    ![CreateGetAPI](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/67.png?width=90pc)
     - Tiếp theo, thêm các đoạn mã sau để tạo phương thức **BookApiGet**, triển khai **BookApiDeployment**, giai đoạn **BookApiStage** và quyền **BookApiGetInvokePermission**.
     ```
     BookApiGet:
@@ -64,7 +64,7 @@ pre : " <b> 4.2. </b> "
         Principal: apigateway.amazonaws.com
         SourceAccount: !Ref "AWS::AccountId"
     ```
-    ![CreateGetAPI](/images/temp/1/68.png?width=90pc)
+    ![CreateGetAPI](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/68.png?width=90pc)
 
 3. Chạy lệnh sau để triển khai SAM.
     ```
@@ -72,17 +72,17 @@ pre : " <b> 4.2. </b> "
     sam validate
     sam deploy
     ```
-    ![CreateGetAPI](/images/temp/1/69.png?width=90pc)
+    ![CreateGetAPI](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/69.png?width=90pc)
 
 4. Mở [AWS API Gateway console](https://us-east-1.console.aws.amazon.com/apigateway/home?region=us-east-1).
     - Nhấp vào **fcj-serverless-api** REST api.
-    ![PrepRestApi](/images/temp/1/64.png?width=90pc)
+    ![PrepRestApi](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/64.png?width=90pc)
     - Tại trang tài nguyên **fcj-serverless-api**.
       - Nhấp vào **Resources**.
       - Chọn **GET**.
       - Nhấp vào **Lambda integration** và kiểm tra hàm **books_list**.     
-      ![CreateGetAPI](/images/temp/1/70.png?width=90pc) 
+      ![CreateGetAPI](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/70.png?width=90pc) 
       - Nhấp vào **Stages**.
       - Chọn **GET**.
       - Sao chép và lưu **Invoke URL**.     
-      ![CreateGetAPI](/images/temp/1/71.png?width=90pc)
+      ![CreateGetAPI](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/71.png?width=90pc)

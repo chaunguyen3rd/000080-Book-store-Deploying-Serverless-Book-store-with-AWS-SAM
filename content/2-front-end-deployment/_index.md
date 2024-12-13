@@ -9,7 +9,7 @@ In this step, we will create an S3 bucket with Static web hosting enabled and pu
 
 1. Open **template.yaml** file in **fcj-book-shop** folder that we created in part 1.
     - Delete unnecessary part.
-![CreateS3Bucket](/images/temp/1/12.png?width=90pc)
+![CreateS3Bucket](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/12.png?width=90pc)
 
 2. Copy the following scripts into that file.
     ```
@@ -18,7 +18,7 @@ In this step, we will create an S3 bucket with Static web hosting enabled and pu
         Type: String
         Default: fcj-book-shop-by-myself    
     ```
-    ![CreateS3Bucket](/images/temp/1/13.png?width=90pc)
+    ![CreateS3Bucket](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/13.png?width=90pc)
 
     ```
     FcjBookShop:
@@ -52,7 +52,7 @@ In this step, we will create an S3 bucket with Static web hosting enabled and pu
     ```
 
     The above script defines an S3 bucket is  **fcj-book-shop** with **FcjBookShopPolicy** policy - allow public access.
-    ![CreateS3Bucket](/images/temp/1/14.png?width=90pc)
+    ![CreateS3Bucket](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/14.png?width=90pc)
 
 3. Run the below command.
     - To build at the directory of the SAM project: **fcj-book-shop**.
@@ -63,7 +63,7 @@ In this step, we will create an S3 bucket with Static web hosting enabled and pu
       ```
       sam validate
       ```
-      ![CreateS3Bucket](/images/temp/1/15.png?width=90pc)
+      ![CreateS3Bucket](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/15.png?width=90pc)
 
     - To deploy SAM.
       ```
@@ -72,34 +72,34 @@ In this step, we will create an S3 bucket with Static web hosting enabled and pu
       - Enter stack name: `fcj-book-shop`
       - Enter the deployemnt region, such as: `us-east-1`- should be the same as the default region.
       - Then enter other information as shown below.
-      ![CreateS3Bucket](/images/temp/1/16.png?width=90pc)
+      ![CreateS3Bucket](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/16.png?width=90pc)
       - Wait a while to create the CloudFormation stack changeset.
       - Enter "y" when **Deploy this changeset?**.
-      ![CreateS3Bucket](/images/temp/1/17.png?width=90pc)
+      ![CreateS3Bucket](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/17.png?width=90pc)
 
 4. Open [Amazon S3 console](https://s3.console.aws.amazon.com/s3/buckets?region=ap-southeast-1&region=ap-southeast-1).
     - Check if the bucket has been created or not, click **fcj-book-shop-by-myself** bucket.
-    ![CreateS3Bucket](/images/temp/1/18.png?width=90pc)
+    ![CreateS3Bucket](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/18.png?width=90pc)
 
 5. At **fcj-book-shop-by-myself** page.
     - Click **Properties** tab.
-    ![CreateS3Bucket](/images/temp/1/19.png?width=90pc)
+    ![CreateS3Bucket](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/19.png?width=90pc)
     - Then scroll down, check state of **Static website hosting**.
     - Record the endpoint of the website.
-    ![CreateS3Bucket](/images/temp/1/20.png?width=90pc)
+    ![CreateS3Bucket](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/20.png?width=90pc)
     - Click **Permissions** tab.
     - Check the policy has been added.
-    ![CreateS3Bucket](/images/temp/1/21.png?width=90pc)
+    ![CreateS3Bucket](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/21.png?width=90pc)
 
 6. Open [CloudFormation console](https://ap-southeast-1.console.aws.amazon.com/cloudformation/home?region=ap-southeast-1#/stacks?filteringStatus=active&filteringText=&viewNested=true&hideStacks=false). Two stacks have been created.
     - Click **fcj-book-shop** stack.
-    ![CreateS3Bucket](/images/temp/1/22.png?width=90pc)
+    ![CreateS3Bucket](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/22.png?width=90pc)
 
 7. At **fcj-book-shop** page.
     - Click **Resource** tab, see the resources that CloudFormation has initialized.
-    ![CreateS3Bucket](/images/temp/1/23.png?width=90pc)
+    ![CreateS3Bucket](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/23.png?width=90pc)
     - Click to other stack and see other resources.
-    ![CreateS3Bucket](/images/temp/1/24.png?width=90pc)
+    ![CreateS3Bucket](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/24.png?width=90pc)
 
 8. Download **fcj-serverless-frontend** code to your device
     - Open a terminal on your computer at the directory where you want to save the source code.
@@ -115,7 +115,7 @@ In this step, we will create an S3 bucket with Static web hosting enabled and pu
     aws s3 cp build s3://fcj-book-shop-by-myself --recursive
     ```
     Result after uploading:
-    ![CreateS3Bucket](/images/temp/1/25.png?width=90pc)
+    ![CreateS3Bucket](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/25.png?width=90pc)
 
 
 

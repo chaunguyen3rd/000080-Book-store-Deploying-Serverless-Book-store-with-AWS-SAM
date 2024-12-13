@@ -41,7 +41,7 @@ Chúng ta sẽ tạo một hàm Lambda để xoá tất cả các mục với kh
                       - !Ref BookImageResizeShop
                       - /*
     ```
-    ![LambdaDeleteFunction](/images/temp/1/48.png?width=90pc)
+    ![LambdaDeleteFunction](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/48.png?width=90pc)
 
 3. Cấu trúc thư mục như sau.
     ```
@@ -128,16 +128,16 @@ Chúng ta sẽ tạo một hàm Lambda để xoá tất cả các mục với kh
     sam validate
     sam deploy
     ```
-    ![LambdaDeleteFunction](/images/temp/1/49.png?width=90pc)
+    ![LambdaDeleteFunction](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/49.png?width=90pc)
 
 5. Mở [AWS Lambda console](https://ap-southeast-1.console.aws.amazon.com/lambda/home?region=ap-southeast-1#/functions).
     - Nhấp vào hàm **book_delete** đã được tạo.
-    ![LambdaDeleteFunction](/images/temp/1/50.png?width=90pc)
+    ![LambdaDeleteFunction](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/50.png?width=90pc)
     - Tại trang **book_delete**.
       - Nhấp vào tab **Configuration**.
       - Chọn **Permissions** ở menu bên trái.
       - Nhấp vào vai trò mà hàm đang thực thi.     
-      ![LambdaDeleteFunction](/images/temp/1/51.png?width=90pc)
+      ![LambdaDeleteFunction](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/51.png?width=90pc)
     - Tại trang **fcj-book-shop-BookDeleteRole-...**.
       - Kiểm tra các quyền được cấp cho hàm.
-      ![LambdaDeleteFunction](/images/temp/1/52.png?width=90pc)
+      ![LambdaDeleteFunction](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/52.png?width=90pc)

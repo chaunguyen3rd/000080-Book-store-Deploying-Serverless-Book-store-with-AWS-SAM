@@ -24,14 +24,14 @@ pre : " <b> 4.3. </b> "
         StageName: !Ref stage
         # DeploymentId: !Ref BookApiDeployment
     ```
-    ![CreatePostAPI](/images/temp/1/72.png?&width=90pc)
+    ![CreatePostAPI](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/72.png?&width=90pc)
     - Chạy lệnh sau để triển khai SAM.
     ```
     sam build
     sam validate
     sam deploy
     ```
-    ![CreatePostAPI](/images/temp/1/73.png?&width=90pc)
+    ![CreatePostAPI](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/73.png?&width=90pc)
     - Tiếp theo, chúng ta sẽ tạo **BookApiCreate** và **BookApiCreateInvokePermission**.
     ```
     BookApiCreate:
@@ -67,7 +67,7 @@ pre : " <b> 4.3. </b> "
         Principal: apigateway.amazonaws.com
         SourceAccount: !Ref "AWS::AccountId"
     ```
-    ![CreatePostAPI](/images/temp/1/74.png?&width=90pc)
+    ![CreatePostAPI](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/74.png?&width=90pc)
     - Sau đó, chúng ta bỏ ghi chú khối mã mà chúng ta đã ghi chú ở trên.
     ```
     BookApiDeployment:
@@ -85,7 +85,7 @@ pre : " <b> 4.3. </b> "
         StageName: !Ref stage
         DeploymentId: !Ref BookApiDeployment
     ```
-    ![CreatePostAPI](/images/temp/1/75.png?&width=90pc)
+    ![CreatePostAPI](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/75.png?&width=90pc)
 
 3. Chạy lệnh sau để triển khai SAM.
     ```
@@ -93,17 +93,17 @@ pre : " <b> 4.3. </b> "
     sam validate
     sam deploy
     ```
-    ![CreatePostAPI](/images/temp/1/76.png?&width=90pc)
+    ![CreatePostAPI](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/76.png?&width=90pc)
 
 4. Mở [AWS API Gateway console](https://us-east-1.console.aws.amazon.com/apigateway/home?region=us-east-1).
     - Nhấp vào **fcj-serverless-api** REST api.
-    ![PrepRestApi](/images/temp/1/64.png?width=90pc)
+    ![PrepRestApi](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/64.png?width=90pc)
     - Tại trang tài nguyên **fcj-serverless-api**.
       - Nhấp vào **Resources**.
       - Chọn **POST**.
       - Nhấp vào **Lambda integration** và kiểm tra hàm **book_create**.     
-      ![CreatePostAPI](/images/temp/1/77.png?&width=90pc)
+      ![CreatePostAPI](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/77.png?&width=90pc)
       - Nhấp vào **Stages**.
       - Chọn **POST**.
       - Sao chép và lưu **Invoke URL**.     
-      ![CreatePostAPI](/images/temp/1/78.png?&width=90pc)
+      ![CreatePostAPI](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/78.png?&width=90pc)

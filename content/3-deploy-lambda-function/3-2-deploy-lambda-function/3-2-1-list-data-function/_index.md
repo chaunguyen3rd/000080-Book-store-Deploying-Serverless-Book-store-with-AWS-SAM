@@ -33,7 +33,7 @@ We will create a Lambda function that reads all the data in the DynamoDB table.
               Resource:
                 - !Sub arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/${booksTableName}
     ```
-    ![LambdaListFunction](/images/temp/1/33.png?width=90pc)
+    ![LambdaListFunction](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/33.png?width=90pc)
 
 3. The directory structure is as follows.
     ```
@@ -104,16 +104,16 @@ We will create a Lambda function that reads all the data in the DynamoDB table.
     sam validate
     sam deploy
     ```
-    ![LambdaListFunction](/images/temp/1/34.png?width=90pc)
+    ![LambdaListFunction](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/34.png?width=90pc)
 
 5. Open [AWS Lambda console](https://ap-southeast-1.console.aws.amazon.com/lambda/home?region=ap-southeast-1#/functions).
     - Click **books_list** function created.
-    ![LambdaListFunction](/images/temp/1/35.png?width=90pc)
+    ![LambdaListFunction](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/35.png?width=90pc)
     - At **books_list** page.
       - Click **Configuration** tab.
       - Select **Permissions** on the left menu.
       - Click on the role that the function is executing.
-      ![LambdaListFunction](/images/temp/1/36.png?width=90pc)
+      ![LambdaListFunction](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/36.png?width=90pc)
     - At **fcj-book-shop-BooksListRole-...** page.
       - Check the permissions granted to the function.
-      ![LambdaListFunction](/images/temp/1/37.png?width=90pc)
+      ![LambdaListFunction](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/37.png?width=90pc)

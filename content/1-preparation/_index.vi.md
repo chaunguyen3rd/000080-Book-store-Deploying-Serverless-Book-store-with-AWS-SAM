@@ -19,41 +19,41 @@ Nếu bạn đã cài đặt thông tin xác thực AWS từ các bài viết tr
     - Mở [IAM console](https://us-east-1.console.aws.amazon.com/iamv2/home?region=us-east-1#/home)
     - Nhấp vào **User** trên menu bên trái.
     - Nhấp vào nút **Create user**.
-    ![IAMConsole](/images/temp/1/1.png?width=90pc)
+    ![IAMConsole](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/1.png?width=90pc)
     - Tại trang **Step 1: Specify user details**.
       - Nhập tên người dùng, ví dụ: `sam-admin`.
       - Chọn tùy chọn **Provide user access to the AWS Management Console**.
       - Chọn **I want to create an IAM user**.
       - Chọn **Custom password**, sau đó nhập mật khẩu của bạn.
-      ![IAMConsole](/images/temp/1/2.png?width=90pc)
+      ![IAMConsole](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/2.png?width=90pc)
       - Bỏ chọn **User must create a new password at next sign-in**.
       - Nhấp vào **Next**.
-      ![IAMConsole](/images/temp/1/3.png?width=90pc)
+      ![IAMConsole](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/3.png?width=90pc)
     - Tại trang **Step 2: Set permissions**.
       - Chọn **Attach policies directly**.
       - Chọn chính sách **AdministratorAccess** để người dùng có toàn quyền truy cập vào các dịch vụ.
       - Nhấp vào **Next**.
-      ![IAMConsole](/images/temp/1/4.png?width=90pc)
+      ![IAMConsole](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/4.png?width=90pc)
     - Tại trang **Step 3: Review and create**.
       - Xem lại cấu hình và nhấp vào **Create user**.
-      ![IAMConsole](/images/temp/1/5.png?width=90pc)
+      ![IAMConsole](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/5.png?width=90pc)
     - Tại trang **Step 4: Review and create**, nhấp vào **Return to users list**.
     - Tại trang **sam-admin**.
       - Nhấp vào **Create access key**.
-      ![IAMConsole](/images/temp/1/6.png?width=90pc)
+      ![IAMConsole](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/6.png?width=90pc)
     - Tại **Step 1: Access key best practices & alternatives**.
       - Đối với **Use case**, chọn **Command Line Interface(CLI)**.
-      ![IAMConsole](/images/temp/1/7.png?width=90pc)
+      ![IAMConsole](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/7.png?width=90pc)
       - Cuộn xuống dưới cùng, chọn **I understand the above recommendation ...**.
       - Nhấp vào **Next**.
-      ![IAMConsole](/images/temp/1/8.png?width=90pc)
+      ![IAMConsole](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/8.png?width=90pc)
     - Tại **Step 2: Set description tag**.
       - Nhấp vào **Create access key**.
-      ![IAMConsole](/images/temp/1/9.png?width=90pc)
+      ![IAMConsole](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/9.png?width=90pc)
     - Tại **Step 3: Retrieve access keys**.
       - Nhấp vào **Download .csv file**.
       - Sau đó, nhấp vào **Done**.
-      ![IAMConsole](/images/temp/1/10.png?width=90pc)
+      ![IAMConsole](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/10.png?width=90pc)
     - Chạy lệnh sử dụng terminal trên thiết bị của bạn.
       ```
       aws configure
@@ -94,5 +94,5 @@ Nếu bạn đã cài đặt thông tin xác thực AWS từ các bài viết tr
 
       Project name [sam-app]:  fcj-book-shop
       ```
-      ![IAMConsole](/images/temp/1/11.png?width=90pc)
+      ![IAMConsole](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/11.png?width=90pc)
 Bạn đã tạo một dự án SAM mẫu. Tiếp theo, chúng ta sẽ chỉnh sửa dự án đó theo kiến trúc ứng dụng của chúng ta.
