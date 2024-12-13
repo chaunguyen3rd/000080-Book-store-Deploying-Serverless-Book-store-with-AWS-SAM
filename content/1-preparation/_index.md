@@ -18,7 +18,7 @@ If you have already installed AWS credentials from previous posts, you can skip 
 {{% /notice %}}
     - Open [IAM console](https://us-east-1.console.aws.amazon.com/iamv2/home?region=us-east-1#/home)
     - Click **User** on the left menu.
-    - Click **Create user** button
+    - Click **Create user** button.
     ![IAMConsole](/images/temp/1/1.png?width=90pc)
     - At **Step 1: Specify user details** page.
       - Enter user name, such as: `sam-admin`.
@@ -64,35 +64,35 @@ If you have already installed AWS credentials from previous posts, you can skip 
       - **Default region name**: Enter region closest to you.
       - **Default output format**: Can be overlooked.
 
-1. Then, create a sample ``sam`` project.
-	- Run the below commands at the directory where you want to deploy the application.
-		```
-		#Step 1 - Download a sample application
-		sam init
-		```
-	- Then select the options:
-		```
-		Which template source would you like to use?
-			1 - AWS Quick Start Templates
-			2 - Custom Template Location
-		Choice: 1
+3. Then, create a sample ``sam`` project.
+    - Run the below commands at the directory where you want to deploy the application.
+      ```
+      #Step 1 - Download a sample application
+      sam init
+      ```
+    - Then select the options:
+      ```
+      Which template source would you like to use?
+        1 - AWS Quick Start Templates
+        2 - Custom Template Location
+      Choice: 1
 
-		Choose an AWS Quick Start application template
-			1 - Hello World Example
-			2 - Multi-step workflow
-			3 - Serverless API
-			4 - Scheduled task
-			5 - Standalone function
-			6 - Data processing
-			7 - Infrastructure event management
-			8 - Machine Learning
-		Template: 1
+      Choose an AWS Quick Start application template
+        1 - Hello World Example
+        2 - Multi-step workflow
+        3 - Serverless API
+        4 - Scheduled task
+        5 - Standalone function
+        6 - Data processing
+        7 - Infrastructure event management
+        8 - Machine Learning
+      Template: 1
 
-		Use the most popular runtime and package type? (Python and zip) [y/N]: y
+      Use the most popular runtime and package type? (Python and zip) [y/N]: y
 
-		Would you like to enable X-Ray tracing on the function(s) in your application?  [y/N]: N
+      Would you like to enable X-Ray tracing on the function(s) in your application?  [y/N]: N
 
-		Project name [sam-app]:  fcj-book-shop
-		```
-		![IAMConsole](/images/temp/1/11.png?width=90pc)
+      Project name [sam-app]:  fcj-book-shop
+      ```
+      ![IAMConsole](/images/temp/1/11.png?width=90pc)
 You have created a sample SAM project. Next , we will edit that project according to our application architecture.
