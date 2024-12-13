@@ -74,7 +74,7 @@ In this step we create a new Lambda function that resizes the image after the us
 If you create S3 bucket names that are different from the ones in the lab, please check **Policies | Resources** or **Environment** of resources and update.
 {{% /notice %}}
 
-3. The directory structure is as follows:
+3. The directory structure is as follows.
     ```
     fcj-book-shop
     ├── fcj-book-shop
@@ -103,7 +103,7 @@ If you create S3 bucket names that are different from the ones in the lab, pleas
     ![LambdaResizeFunction](/images/temp/1/56.png?width=90pc)
 
 5. Open [AWS Lambda console](https://ap-southeast-1.console.aws.amazon.com/lambda/home?region=ap-southeast-1#/functions).
-    - Click **resize_image** function created
+    - Click **resize_image** function created.
     ![LambdaResizeFunction](/images/temp/1/57.png?width=90pc)
     - At **resize_image** page.
       - Click **Configuration** tab.
