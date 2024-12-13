@@ -1,5 +1,5 @@
 ---
-title : "Deploy front-end"
+title : "Triển khai front-end"
 date :  "`r Sys.Date()`" 
 weight : 2 
 chapter : false
