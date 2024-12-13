@@ -117,5 +117,3 @@ We will create a Lambda function that reads all the data in the DynamoDB table.
     - At **fcj-book-shop-BooksListRole-...** page.
       - Check the permissions granted to the function.
       ![LambdaListFunction](/images/temp/1/37.png?width=90pc)
-
-
