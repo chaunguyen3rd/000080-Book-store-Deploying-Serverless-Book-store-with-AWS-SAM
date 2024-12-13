@@ -32,7 +32,7 @@ The returned result is the entire data of the **Books** table that has been proc
     - Click **Send**. Wait a moment, see the results returned **Successfully created item**.
 ![TestListAPI](/images/temp/1/86.png?width=90pc)
 
-4. Open **Books** table in DynamoDB console to check data
+2. Open **Books** table in DynamoDB console to check data
     - Before call the write API.
   ![TestListAPI](/images/temp/1/87.png?width=90pc)
     - After call the write API.

@@ -5,86 +5,106 @@ weight : 4
 chapter : false
 pre : " <b> 4.4. </b> "
 ---
-1. Mở tệp **template.yaml** trong thư mục **fcj-book-shop**
-2. Thêm đoạn script sau vào cuối tệp tạo một method DELETE
-      ```
-                /books/{id}:
-                  delete:
-                    responses:
-                      "200":
-                        description: 200 response
-                        headers:
-                          Access-Control-Allow-Origin:
-                            type: string
-                    x-amazon-apigateway-integration:
-                      uri:
-                        Fn::Sub: "arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${BookDelete.Arn}/invocations"
-                      responses:
-                        default:
-                          statusCode: 200
-                          responseParameters:
-                            method.response.header.Access-Control-Allow-Origin: "'*'"
-                      passthroughBehavior: when_no_match
-                      httpMethod: POST #always POST
-                      type: aws_proxy
-      ```
-      ![CreatePostAPI](/images/1/67.png?&width=90pc)
+1. Mở tệp **template.yaml** trong thư mục **fcj-book-shop**.
 
-  - Thêm đoạn script sau vào cuối của function **BookDelete** 
-      ```
-            Events:
-              DeleteBook:
-                Type: Api
-                Properties:
-                  Path: /books/{id}
-                  Method: delete
-                  RestApiId:
-                    Ref: BookApi
-      ```
-    ![CreatePostAPI](/images/1/68.png?&width=90pc)
+2. Thêm đoạn mã sau vào cuối tệp để tạo phương thức **DELETE**.
+    - Đầu tiên, chúng ta cần làm mới để tạo phiên bản triển khai mới cho **POST** Api trong vài bước tiếp theo. Bình luận khối **BookApiDeployment**.
+    ```
+    # BookApiDeployment:
+    #   Type: AWS::ApiGateway::Deployment
+    #   Properties:
+    #     RestApiId: !Ref BookApi
+    #   DependsOn:
+    #     - BookApiGet
 
-2. Chạy dòng lệnh dưới đây triển khai SAM
+    BookApiStage:
+      Type: AWS::ApiGateway::Stage
+      Properties:
+        RestApiId: !Ref BookApi
+        StageName: !Ref stage
+        # DeploymentId: !Ref BookApiDeployment
+    ```
+    ![CreateDeleteAPI](/images/temp/1/72.png?&width=90pc)
+    - Chạy lệnh sau để triển khai SAM.
     ```
     sam build
-    sam deploy --guided
+    sam validate
+    sam deploy
     ```
-    ![CreatePostAPI](/images/1/72.png?&width=90pc)
-{{% notice note %}}
-Nhập "y" nếu được hỏi "BookDelete may not have authorization defined, Is this okay? [y/N]: "
-{{% /notice %}}
+    ![CreateDeleteAPI](/images/temp/1/73.png?&width=90pc)
+    - Tiếp theo, chúng ta sẽ tạo **BookApiDelete** và **BookApiDeleteInvokePermission**.
+    ```
+    BookApiDelete:
+      Type: AWS::ApiGateway::Method
+      Properties:
+        HttpMethod: DELETE
+        RestApiId: !Ref BookApi
+        ResourceId: !Ref BookDeleteApiResource
+        AuthorizationType: NONE
+        Integration:
+          Type: AWS_PROXY
+          IntegrationHttpMethod: POST # For Lambda integrations, you must set the integration method to POST
+          Uri: !Sub >-
+            arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${BookDelete.Arn}/invocations
+          IntegrationResponses:
+            - StatusCode: "200"
+              ResponseParameters:
+                method.response.header.Access-Control-Allow-Origin: "'*'"
+                method.response.header.Access-Control-Allow-Methods: "'DELETE,OPTIONS'"
+                method.response.header.Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'"
+        MethodResponses:
+          - StatusCode: "200"
+            ResponseParameters:
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+              method.response.header.Access-Control-Allow-Methods: "'DELETE,OPTIONS'"
+              method.response.header.Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'"
 
+    BookApiDeleteInvokePermission:
+      Type: AWS::Lambda::Permission
+      Properties:
+        FunctionName: !Ref BookDelete
+        Action: lambda:InvokeFunction
+        Principal: apigateway.amazonaws.com
+        SourceAccount: !Ref "AWS::AccountId"
+    ```
+    ![CreateDeleteAPI](/images/temp/1/79.png?&width=90pc)
+    - Sau đó, chúng ta bỏ ghi chú khối mã mà chúng ta đã ghi chú ở trên.
+    ```
+    BookApiDeployment:
+      Type: AWS::ApiGateway::Deployment
+      Properties:
+        RestApiId: !Ref BookApi
+      DependsOn:
+        - BookApiGet
+        - BookApiCreate
+        - BookApiDelete
 
-3. Mở bảng điều khiển của function **book_delete**
-    - Ấn vào **API Gateway**
-      ![CreatePostAPI](/images/1/69.png?&width=90pc)
+    BookApiStage:
+      Type: AWS::ApiGateway::Stage
+      Properties:
+        RestApiId: !Ref BookApi
+        StageName: !Ref stage
+        DeploymentId: !Ref BookApiDeployment
+    ```
+    ![CreateDeleteAPI](/images/temp/1/80.png?&width=90pc)
 
-4. Hiện thị API Gateway đang được tương tác với function
-    - Ấn vào API Gateway đó
-5. Hiện thị các resource và method DELETE
-![CreatePostAPI](/images/1/70.png?&width=90pc)
+3. Chạy lệnh sau để triển khai SAM.
+    ```
+    sam build
+    sam validate
+    sam deploy
+    ```
+    ![CreateDeleteAPI](/images/temp/1/81.png?&width=90pc)
 
-6. Chọn tab **Stages** ở menu phía bên trái
-    - Ấn chọn **staging**
-    - Ấn chọn **DELTE**
-    - Ghi lại **InvokeURL** của method DELETE
-![CreatePostAPI](/images/1/71.png?&width=90pc)
-
-7. Thêm đoạn script sau vào cuối tệp **template.yaml** để API hỗ trợ các tệp Binary Media Types
-      ```
-            BinaryMediaTypes: 
-              - multipart~1form-data
-      ```
-8. Chạy dòng lệnh dưới đây triển khai SAM
-      ```
-      sam build
-      sam deploy --guided
-      ```
-      ![CreatePostAPI](/images/1/73.png?&width=90pc)
-
-9. Trở lại với bảng điều khiển của API
-    - Chọn **Settings** ở menu phía bên trái
-    - Kéo xuống dưới, kiểm tra xem **multipart/form-data** đã được thêm hay chưa trong phần **Binary Meida Types**
-![CreatePostAPI](/images/1/74.png?&width=90pc)
-
-
-
+4. Mở [AWS API Gateway console](https://us-east-1.console.aws.amazon.com/apigateway/home?region=us-east-1).
+    - Nhấp vào **fcj-serverless-api** REST api.
+    ![CreateDeleteAPI](/images/temp/1/64.png?width=90pc)
+    - Tại trang tài nguyên **fcj-serverless-api**.
+      - Nhấp vào **Resources**.
+      - Chọn **DELETE**.
+      - Nhấp vào **Lambda integration** và kiểm tra hàm **book_delete**.     
+      ![CreateDeleteAPI](/images/temp/1/82.png?&width=90pc)
+      - Nhấp vào **Stages**.
+      - Chọn **DELETE**.
+      - Sao chép và lưu **Invoke URL**.     
+      ![CreateDeleteAPI](/images/temp/1/83.png?&width=90pc)
