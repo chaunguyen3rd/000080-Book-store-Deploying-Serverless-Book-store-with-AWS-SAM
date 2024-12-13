@@ -14,7 +14,7 @@ In this workshop 3, we will rebuild the web application in workshop 2 with AWS S
 
 The architecture of the application we will build:
 
-![WebArchitect](/images/serverless-architect-diagram.png?featherlight=false&width=50pc)
+![WebArchitect](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/serverless-architect-diagram.png?featherlight=false&width=50pc)
 
 #### Content
 
