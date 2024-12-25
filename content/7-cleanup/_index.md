@@ -16,6 +16,6 @@ pre : " <b> 7. </b> "
 2. Delete CloudFormation stacks.
 - Execute the below command to delete the AWS SAM application.
 ```
-sam delete --stack-name fcj-book-shop
+sam delete --stack-name fcj-book-store
 sam delete --stack-name aws-sam-cli-managed-default
 ```
