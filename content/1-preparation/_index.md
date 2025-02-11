@@ -19,28 +19,28 @@ If you have already installed AWS credentials from previous posts, you can skip 
     - Open [IAM console](https://us-east-1.console.aws.amazon.com/iamv2/home?region=us-east-1#/home)
     - Click **User** on the left menu.
     - Click **Create user** button.
-    ![IAMConsole](/images/temp/1/1.png?width=90pc)
+      ![IAMConsole](/images/temp/1/1.png?width=90pc)
     - At **Step 1: Specify user details** page.
       - Enter user name, such as: `sam-admin`.
       - Check option **Provide user access to the AWS Management Console**.
       - Select **I want to create an IAM user**.
       - Select **Custom password**, then enter your password.
-      ![IAMConsole](/images/temp/1/2.png?width=90pc)
+        ![IAMConsole](/images/temp/1/2.png?width=90pc)
       - Uncheck the **User must create a new password at next sign-in**.
       - Click **Next**.
-      ![IAMConsole](/images/temp/1/3.png?width=90pc)
+        ![IAMConsole](/images/temp/1/3.png?width=90pc)
     - At **Step 2: Set permissions** page.
       - Select **Attach policies directly**.
       - Select **AdministratorAccess** policy to the user has full access to the services.
       - Click **Next**.
-      ![IAMConsole](/images/temp/1/4.png?width=90pc)
+        ![IAMConsole](/images/temp/1/4.png?width=90pc)
     - At **Step 3: Review and create** page.
       - Review configuration, and click **Create user**.
-      ![IAMConsole](/images/temp/1/5.png?width=90pc)
+        ![IAMConsole](/images/temp/1/5.png?width=90pc)
     - At **Step 4: Review and create** page, click **Return to users list**.
     - At **sam-admin** page.
       - Click **Create access key**.
-      ![IAMConsole](/images/temp/1/6.png?width=90pc)
+        ![IAMConsole](/images/temp/1/6.png?width=90pc)
     - At **Step 1: Access key best practices & alternatives**.
       - For **Use case**, select **Command Line Interface(CLI)**.
         ![IAMConsole](/images/temp/1/7.png?width=90pc)
