@@ -1,6 +1,6 @@
 ---
 title : "Chuẩn bị"
-date :  "`r Sys.Date()`" 
+date :  2025-02-11
 weight : 1
 chapter : false
 pre : " <b> 4.1. </b> "
@@ -11,7 +11,8 @@ Trong bước này, chúng ta thực hiện một số bước chuẩn bị đ�
 
 2. Thêm đoạn mã sau vào cuối tệp.
     - Đầu tiên, chúng ta sẽ tạo các tham số **apiType**, **binaryMediaType** và **getOrPostPathPart**.
-    ```
+
+    ```yml
     apiType:
       Type: String
       Default: REGIONAL
@@ -28,9 +29,11 @@ Trong bước này, chúng ta thực hiện một số bước chuẩn bị đ�
       Type: String
       Default: "{id}"
     ```
-    ![PrepRestApi](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/61.png?width=90pc)
+
+    ![PrepRestApi](/images/temp/1/61.png?width=90pc)
     - Tiếp theo, chúng ta sẽ tạo **BookApi** RestApi và **BookApiResource** Resource.
-    ```
+
+    ```yml
     BookApi:
       Type: AWS::ApiGateway::RestApi
       Properties:
@@ -55,29 +58,32 @@ Trong bước này, chúng ta thực hiện một số bước chuẩn bị đ�
         ParentId: !Ref BookApiResource
         PathPart: !Ref deletePathPart
     ```
-    ![PrepRestApi](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/62.png?width=90pc)
-    
+
+    ![PrepRestApi](/images/temp/1/62.png?width=90pc)
+
 3. Chạy lệnh sau để triển khai SAM.
-    ```
+
+    ```bash
     sam build
     sam validate
     sam deploy
     ```
-    ![PrepRestApi](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/63.png?width=90pc)
+
+    ![PrepRestApi](/images/temp/1/63.png?width=90pc)
 
 4. Mở [AWS API Gateway console](https://us-east-1.console.aws.amazon.com/apigateway/home?region=us-east-1).
     - Nhấp vào **fcj-serverless-api** REST api.
-    ![PrepRestApi](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/64.png?width=90pc)
+    ![PrepRestApi](/images/temp/1/64.png?width=90pc)
     - Tại trang tài nguyên **fcj-serverless-api**.
       - Nhấp vào **Resources**.
       - Chọn **/books**.
-      - Kiểm tra thông tin **Resource details**.     
-      ![PrepRestApi](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/65.png?width=90pc)
+      - Kiểm tra thông tin **Resource details**.
+      ![PrepRestApi](/images/temp/1/65.png?width=90pc)
       - Chọn **/{id}**.
       - Kiểm tra thông tin **Resource details**.
-      ![PrepRestApi](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/66.png?width=90pc)
+      ![PrepRestApi](/images/temp/1/66.png?width=90pc)
       - Nhấp vào **API settings**.
-      - Kiểm tra loại phương tiện **multipart/form-data** tại **Binary media types**.     
-      ![PrepRestApi](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/84.png?width=90pc)
+      - Kiểm tra loại phương tiện **multipart/form-data** tại **Binary media types**.
+      ![PrepRestApi](/images/temp/1/84.png?width=90pc)
 
 Vậy là chúng ta đã hoàn thành một số bước chuẩn bị. Tiếp theo, chúng ta sẽ tạo các API GET, POST và DELETE.

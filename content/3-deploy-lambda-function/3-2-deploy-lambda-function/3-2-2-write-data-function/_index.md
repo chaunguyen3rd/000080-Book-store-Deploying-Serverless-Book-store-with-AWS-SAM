@@ -1,6 +1,6 @@
 ---
 title : "Writing Lambda function"
-date :  "`r Sys.Date()`" 
+date :  2025-02-11
 weight : 2
 chapter : false
 pre : " <b> 3.2.2 </b> "
@@ -11,7 +11,8 @@ In this step we create a new Lambda function to write data to DynamoDB on SAM.
 
 2. Add the following scripts at the end of the file to create a Lambda function that writes data to DynamoDB.
     - Firstly, we will create **bookImageShopBucketName** and **bookImageResizeShopBucketName** parameters.
-    ```
+
+    ```yml
     bookImageShopBucketName:
       Type: String
       Default: book-image-shop-by-myself
@@ -20,9 +21,11 @@ In this step we create a new Lambda function to write data to DynamoDB on SAM.
       Type: String
       Default: book-image-resize-shop-by-myself
     ```
-    ![LambdaCreateFunction](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/38.png?width=90pc)
+
+    ![LambdaCreateFunction](/images/temp/1/38.png?width=90pc)
     - Next, we will create **BookImageShop** and **BookImageResizeShop** which saves the image after resizing with CORS rule and policy settings.
-    ```
+
+    ```yml
     BookImageShop:
       Type: AWS::S3::Bucket
       Properties:
@@ -71,9 +74,11 @@ In this step we create a new Lambda function to write data to DynamoDB on SAM.
                   - !Ref BookImageResizeShop
                   - /*
     ```
-    ![LambdaCreateFunction](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/39.png?width=90pc)
+
+    ![LambdaCreateFunction](/images/temp/1/39.png?width=90pc)
     - Then, we add the following scripts to create **BookCreate** function.
-    ```
+
+    ```yml
     BookCreate:
       Type: AWS::Serverless::Function
       Properties:
@@ -103,14 +108,16 @@ In this step we create a new Lambda function to write data to DynamoDB on SAM.
                       - !Ref BookImageShop
                       - /*
     ```
-    ![LambdaCreateFunction](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/40.png?width=90pc)
-    
-  {{% notice warning %}}
-  If you create S3 bucket name is different from the one in the lab, please update **Policies | Resources** of **book_create** function with that name.
-  {{% /notice %}}
+
+    ![LambdaCreateFunction](/images/temp/1/40.png?width=90pc)
+
+    {{% notice warning %}}
+    If you create S3 bucket name is different from the one in the lab, please update **Policies | Resources** of **book_create** function with that name.
+    {{% /notice %}}
 
 3. The directory structure is as follows.
-    ```
+
+    ```txt
     fcj-book-shop
     ├── fcj-book-shop
     │   ├── books_list
@@ -120,9 +127,11 @@ In this step we create a new Lambda function to write data to DynamoDB on SAM.
     │       └── requirements.txt
     └── template.yaml
     ```
+
     - Create **book_create** folder in **fcj-book-shop/fcj-book-shop/** folder.
     - Create **book_create.py** file and copy the below code block to it.
-    ```
+
+    ```py
     import base64
     from multipart import MultipartParser
     from io import BytesIO
@@ -225,37 +234,42 @@ In this step we create a new Lambda function to write data to DynamoDB on SAM.
             print(f"Error processing form data: {e}")
             raise Exception(f'Error processing form data: {e}')
     ```
+
     - In **fcj-book-shop/fcj-book-shop/book_create** folder, create **requirements.txt** file.
     - Copy the below code block to it.
-    ```
+
+    ```txt
     multipart
     ```
+
 4. Run the following command to deploy SAM.
-    ```
+
+    ```bash
     sam build
     sam validate
     sam deploy
     ```
-    ![LambdaCreateFunction](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/41.png?width=90pc)
+
+    ![LambdaCreateFunction](/images/temp/1/41.png?width=90pc)
 
 5. Open [AWS Lambda console](https://ap-southeast-1.console.aws.amazon.com/lambda/home?region=ap-southeast-1#/functions).
     - Click **book_create** function created.
-    ![LambdaCreateFunction](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/42.png?width=90pc)
+    ![LambdaCreateFunction](/images/temp/1/42.png?width=90pc)
     - At **book_create** page.
       - Click **Configuration** tab.
       - Select **Permissions** on the left menu.
       - Click on the role that the function is executing.
-      ![LambdaCreateFunction](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/43.png?width=90pc)
+      ![LambdaCreateFunction](/images/temp/1/43.png?width=90pc)
     - At **fcj-book-shop-BookCreateRole-...** page.
       - Check the permissions granted to the function.
-      ![LambdaCreateFunction](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/44.png?width=90pc)
+      ![LambdaCreateFunction](/images/temp/1/44.png?width=90pc)
 
 6. Open [Amazon S3 console](https://s3.console.aws.amazon.com/s3/buckets?region=ap-southeast-1&region=ap-southeast-1).
     - The **book-image-resize-shop-by-myself** and **book-image-shop-by-myself** has been created.
-    ![LambdaCreateFunction](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/45.png?width=90pc)
+    ![LambdaCreateFunction](/images/temp/1/45.png?width=90pc)
     - Click on **book-image-resize-shop-by-myself** bucket. At **book-image-resize-shop-by-myself** page.
       - Click **Permissions** tab.
       - Check the **Bucket policy** information.
-      ![LambdaCreateFunction](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/46.png?width=90pc)
+      ![LambdaCreateFunction](/images/temp/1/46.png?width=90pc)
       - Scroll down to the bottom, and check the **Cross-origin resource sharing (CORS)**.
-      ![LambdaCreateFunction](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/47.png?width=90pc)
+      ![LambdaCreateFunction](/images/temp/1/47.png?width=90pc)

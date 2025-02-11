@@ -1,6 +1,6 @@
 ---
 title : "Create DELETE API"
-date :  "`r Sys.Date()`" 
+date :  2025-02-11
 weight : 4
 chapter : false
 pre : " <b> 4.4. </b> "
@@ -9,7 +9,8 @@ pre : " <b> 4.4. </b> "
 
 2. Add the following script at the end of the file that creates the **DELETE** method.
     - Firstly, we need to refresh to create a new deployment version for **POST** Api in a few next steps. Comment **BookApiDeployment** block.
-    ```
+
+    ```yml
     # BookApiDeployment:
     #   Type: AWS::ApiGateway::Deployment
     #   Properties:
@@ -24,16 +25,20 @@ pre : " <b> 4.4. </b> "
         StageName: !Ref stage
         # DeploymentId: !Ref BookApiDeployment
     ```
-    ![CreateDeleteAPI](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/72.png?&width=90pc)
+
+    ![CreateDeleteAPI](/images/temp/1/72.png?&width=90pc)
     - Run the following command to deploy SAM.
-    ```
+
+    ```bash
     sam build
     sam validate
     sam deploy
     ```
-    ![CreateDeleteAPI](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/73.png?&width=90pc)
+
+    ![CreateDeleteAPI](/images/temp/1/73.png?&width=90pc)
     - Next, we will create **BookApiDelete** and **BookApiDeleteInvokePermission**.
-    ```
+
+    ```yml
     BookApiDelete:
       Type: AWS::ApiGateway::Method
       Properties:
@@ -67,9 +72,11 @@ pre : " <b> 4.4. </b> "
         Principal: apigateway.amazonaws.com
         SourceAccount: !Ref "AWS::AccountId"
     ```
-    ![CreateDeleteAPI](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/79.png?&width=90pc)
+
+    ![CreateDeleteAPI](/images/temp/1/79.png?&width=90pc)
     - Then, we uncomment the codeblock that we commented above.
-    ```
+
+    ```yml
     BookApiDeployment:
       Type: AWS::ApiGateway::Deployment
       Properties:
@@ -86,25 +93,28 @@ pre : " <b> 4.4. </b> "
         StageName: !Ref stage
         DeploymentId: !Ref BookApiDeployment
     ```
-    ![CreateDeleteAPI](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/80.png?&width=90pc)
+
+    ![CreateDeleteAPI](/images/temp/1/80.png?&width=90pc)
 
 3. Run the following command to deploy SAM.
-    ```
+
+    ```bash
     sam build
     sam validate
     sam deploy
     ```
-    ![CreateDeleteAPI](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/81.png?&width=90pc)
+
+    ![CreateDeleteAPI](/images/temp/1/81.png?&width=90pc)
 
 4. Open [AWS API Gateway console](https://us-east-1.console.aws.amazon.com/apigateway/home?region=us-east-1).
     - Click **fcj-serverless-api** REST api.
-    ![CreateDeleteAPI](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/64.png?width=90pc)
+    ![CreateDeleteAPI](/images/temp/1/64.png?width=90pc)
     - At **fcj-serverless-api** resources page.
       - Click **Resources**.
       - Select **DELETE**.
       - Click **Lambda integration** and check the **book_delete** function.
-      ![CreateDeleteAPI](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/82.png?&width=90pc)
+      ![CreateDeleteAPI](/images/temp/1/82.png?&width=90pc)
       - Click **Stages**.
       - Select **DELETE**.
       - Copy and save the **Invoke URL**.
-      ![CreateDeleteAPI](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/83.png?&width=90pc)
+      ![CreateDeleteAPI](/images/temp/1/83.png?&width=90pc)

@@ -1,6 +1,6 @@
 ---
 title : "Tạo DELETE API"
-date :  "`r Sys.Date()`" 
+date :  2025-02-11
 weight : 4
 chapter : false
 pre : " <b> 4.4. </b> "
@@ -9,7 +9,8 @@ pre : " <b> 4.4. </b> "
 
 2. Thêm đoạn mã sau vào cuối tệp để tạo phương thức **DELETE**.
     - Đầu tiên, chúng ta cần làm mới để tạo phiên bản triển khai mới cho **POST** Api trong vài bước tiếp theo. Bình luận khối **BookApiDeployment**.
-    ```
+
+    ```yml
     # BookApiDeployment:
     #   Type: AWS::ApiGateway::Deployment
     #   Properties:
@@ -24,16 +25,20 @@ pre : " <b> 4.4. </b> "
         StageName: !Ref stage
         # DeploymentId: !Ref BookApiDeployment
     ```
-    ![CreateDeleteAPI](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/72.png?&width=90pc)
+
+    ![CreateDeleteAPI](/images/temp/1/72.png?&width=90pc)
     - Chạy lệnh sau để triển khai SAM.
-    ```
+
+    ```bash
     sam build
     sam validate
     sam deploy
     ```
-    ![CreateDeleteAPI](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/73.png?&width=90pc)
+
+    ![CreateDeleteAPI](/images/temp/1/73.png?&width=90pc)
     - Tiếp theo, chúng ta sẽ tạo **BookApiDelete** và **BookApiDeleteInvokePermission**.
-    ```
+
+    ```yml
     BookApiDelete:
       Type: AWS::ApiGateway::Method
       Properties:
@@ -67,9 +72,11 @@ pre : " <b> 4.4. </b> "
         Principal: apigateway.amazonaws.com
         SourceAccount: !Ref "AWS::AccountId"
     ```
-    ![CreateDeleteAPI](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/79.png?&width=90pc)
+
+    ![CreateDeleteAPI](/images/temp/1/79.png?&width=90pc)
     - Sau đó, chúng ta bỏ ghi chú khối mã mà chúng ta đã ghi chú ở trên.
-    ```
+
+    ```yml
     BookApiDeployment:
       Type: AWS::ApiGateway::Deployment
       Properties:
@@ -86,25 +93,28 @@ pre : " <b> 4.4. </b> "
         StageName: !Ref stage
         DeploymentId: !Ref BookApiDeployment
     ```
-    ![CreateDeleteAPI](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/80.png?&width=90pc)
+
+    ![CreateDeleteAPI](/images/temp/1/80.png?&width=90pc)
 
 3. Chạy lệnh sau để triển khai SAM.
-    ```
+
+    ```bash
     sam build
     sam validate
     sam deploy
     ```
-    ![CreateDeleteAPI](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/81.png?&width=90pc)
+
+    ![CreateDeleteAPI](/images/temp/1/81.png?&width=90pc)
 
 4. Mở [AWS API Gateway console](https://us-east-1.console.aws.amazon.com/apigateway/home?region=us-east-1).
     - Nhấp vào **fcj-serverless-api** REST api.
-    ![CreateDeleteAPI](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/64.png?width=90pc)
+    ![CreateDeleteAPI](/images/temp/1/64.png?width=90pc)
     - Tại trang tài nguyên **fcj-serverless-api**.
       - Nhấp vào **Resources**.
       - Chọn **DELETE**.
-      - Nhấp vào **Lambda integration** và kiểm tra hàm **book_delete**.     
-      ![CreateDeleteAPI](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/82.png?&width=90pc)
+      - Nhấp vào **Lambda integration** và kiểm tra hàm **book_delete**.
+      ![CreateDeleteAPI](/images/temp/1/82.png?&width=90pc)
       - Nhấp vào **Stages**.
       - Chọn **DELETE**.
-      - Sao chép và lưu **Invoke URL**.     
-      ![CreateDeleteAPI](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/83.png?&width=90pc)
+      - Sao chép và lưu **Invoke URL**.
+      ![CreateDeleteAPI](/images/temp/1/83.png?&width=90pc)

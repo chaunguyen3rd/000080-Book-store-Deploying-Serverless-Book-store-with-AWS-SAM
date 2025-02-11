@@ -1,6 +1,6 @@
 ---
 title : "Tạo GET API"
-date :  "`r Sys.Date()`" 
+date :  2025-02-11
 weight : 2
 chapter : false
 pre : " <b> 4.2. </b> "
@@ -9,14 +9,17 @@ pre : " <b> 4.2. </b> "
 
 2. Thêm đoạn mã sau vào cuối tệp để tạo REST API và phương thức **GET**.
     - Đầu tiên, chúng ta sẽ tạo tham số **stage**.
-    ```
+
+    ```yml
     stage:
       Type: String
       Default: staging
     ```
-    ![CreateGetAPI](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/67.png?width=90pc)
+
+    ![CreateGetAPI](/images/temp/1/67.png?width=90pc)
     - Tiếp theo, thêm các đoạn mã sau để tạo phương thức **BookApiGet**, triển khai **BookApiDeployment**, giai đoạn **BookApiStage** và quyền **BookApiGetInvokePermission**.
-    ```
+
+    ```yml
     BookApiGet:
       Type: AWS::ApiGateway::Method
       Properties:
@@ -64,25 +67,28 @@ pre : " <b> 4.2. </b> "
         Principal: apigateway.amazonaws.com
         SourceAccount: !Ref "AWS::AccountId"
     ```
-    ![CreateGetAPI](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/68.png?width=90pc)
+
+    ![CreateGetAPI](/images/temp/1/68.png?width=90pc)
 
 3. Chạy lệnh sau để triển khai SAM.
-    ```
+
+    ```bash
     sam build
     sam validate
     sam deploy
     ```
-    ![CreateGetAPI](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/69.png?width=90pc)
+
+    ![CreateGetAPI](/images/temp/1/69.png?width=90pc)
 
 4. Mở [AWS API Gateway console](https://us-east-1.console.aws.amazon.com/apigateway/home?region=us-east-1).
     - Nhấp vào **fcj-serverless-api** REST api.
-    ![PrepRestApi](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/64.png?width=90pc)
+    ![PrepRestApi](/images/temp/1/64.png?width=90pc)
     - Tại trang tài nguyên **fcj-serverless-api**.
       - Nhấp vào **Resources**.
       - Chọn **GET**.
-      - Nhấp vào **Lambda integration** và kiểm tra hàm **books_list**.     
-      ![CreateGetAPI](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/70.png?width=90pc) 
+      - Nhấp vào **Lambda integration** và kiểm tra hàm **books_list**.
+      ![CreateGetAPI](/images/temp/1/70.png?width=90pc)
       - Nhấp vào **Stages**.
       - Chọn **GET**.
-      - Sao chép và lưu **Invoke URL**.     
-      ![CreateGetAPI](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/71.png?width=90pc)
+      - Sao chép và lưu **Invoke URL**.
+      ![CreateGetAPI](/images/temp/1/71.png?width=90pc)

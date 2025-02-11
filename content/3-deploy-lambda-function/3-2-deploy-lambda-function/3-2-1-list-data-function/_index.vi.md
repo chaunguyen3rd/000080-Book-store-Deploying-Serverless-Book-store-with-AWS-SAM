@@ -1,6 +1,6 @@
 ---
 title : "Lambda function đọc dữ liệu"
-date :  "`r Sys.Date()`" 
+date :  2025-02-11
 weight : 1
 chapter : false
 pre : " <b> 3.2.1 </b> "
@@ -10,7 +10,8 @@ Chúng ta sẽ tạo một hàm Lambda để đọc tất cả dữ liệu trong
 1. Mở tệp **template.yaml** trong thư mục **fcj-book-shop**.
 
 2. Thêm đoạn mã sau vào cuối tệp.
-    ```
+
+    ```yml
     BooksList:
     Type: AWS::Serverless::Function
     Properties:
@@ -33,10 +34,12 @@ Chúng ta sẽ tạo một hàm Lambda để đọc tất cả dữ liệu trong
               Resource:
                 - !Sub arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/${booksTableName}
     ```
-    ![LambdaListFunction](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/33.png?width=90pc)
+
+    ![LambdaListFunction](/images/temp/1/33.png?width=90pc)
 
 3. Cấu trúc thư mục như sau.
-    ```
+
+    ```txt
     fcj-book-shop
     ├── fcj-book-shop
     │   ├── books_list
@@ -44,9 +47,11 @@ Chúng ta sẽ tạo một hàm Lambda để đọc tất cả dữ liệu trong
     └── template.yaml
 
     ```
+
     - Tạo thư mục **fcj-book-shop/books_list** trong thư mục **fcj-book-shop**.
     - Tạo tệp **books_list.py** và sao chép đoạn mã dưới đây vào tệp đó.
-    ```
+
+    ```py
     import boto3
     import os
     import simplejson as json
@@ -99,21 +104,23 @@ Chúng ta sẽ tạo một hàm Lambda để đọc tất cả dữ liệu trong
     ```
 
 4. Chạy lệnh sau để triển khai SAM.
-    ```
+
+    ```bash
     sam build
     sam validate
     sam deploy
     ```
-    ![LambdaListFunction](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/34.png?width=90pc)
+
+    ![LambdaListFunction](/images/temp/1/34.png?width=90pc)
 
 5. Mở [AWS Lambda console](https://ap-southeast-1.console.aws.amazon.com/lambda/home?region=ap-southeast-1#/functions).
     - Nhấp vào hàm **books_list** đã được tạo.
-    ![LambdaListFunction](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/35.png?width=90pc)
+    ![LambdaListFunction](/images/temp/1/35.png?width=90pc)
     - Tại trang **books_list**.
       - Nhấp vào tab **Configuration**.
       - Chọn **Permissions** từ menu bên trái.
-      - Nhấp vào vai trò mà hàm đang thực thi.     
-      ![LambdaListFunction](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/36.png?width=90pc)
+      - Nhấp vào vai trò mà hàm đang thực thi.
+      ![LambdaListFunction](/images/temp/1/36.png?width=90pc)
     - Tại trang **fcj-book-shop-BooksListRole-...**.
-      - Kiểm tra các quyền được cấp cho hàm.     
-      ![LambdaListFunction](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/37.png?width=90pc)
+      - Kiểm tra các quyền được cấp cho hàm.
+      ![LambdaListFunction](/images/temp/1/37.png?width=90pc)

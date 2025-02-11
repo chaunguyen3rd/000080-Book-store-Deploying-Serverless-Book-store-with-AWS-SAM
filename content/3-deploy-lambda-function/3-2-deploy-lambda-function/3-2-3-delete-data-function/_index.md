@@ -1,6 +1,6 @@
 ---
 title : "Deleting Lambda function"
-date :  "`r Sys.Date()`" 
+date :  2025-02-11
 weight : 3
 chapter : false
 pre : " <b> 3.2.3 </b> "
@@ -10,7 +10,8 @@ We will create a Lambda function that deletes all items with the specified parti
 1. Open **template.yaml** file in **fcj-book-shop** folder.
 
 2. Add the following script at the end of the file to create a Lambda function that deletes data of DynamoDB table.
-    ```
+
+    ```yml
     BookDelete:
       Type: AWS::Serverless::Function
       Properties:
@@ -41,10 +42,12 @@ We will create a Lambda function that deletes all items with the specified parti
                       - !Ref BookImageResizeShop
                       - /*
     ```
-    ![LambdaDeleteFunction](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/48.png?width=90pc)
+
+    ![LambdaDeleteFunction](/images/temp/1/48.png?width=90pc)
 
 3. The directory structure is as follows.
-    ```
+
+    ```txt
     fcj-book-shop
     ├── fcj-book-shop
     │   ├── books_list
@@ -56,9 +59,11 @@ We will create a Lambda function that deletes all items with the specified parti
     │       └── book_delete.py
     └── template.yaml
     ```
+
     - Create **book_delete** folder in **fcj-book-shop/fcj-book-shop/** folder.
     - Create **book_delete.py** file and copy the below code block to it.
-    ```
+
+    ```py
     import boto3
     import os
 
@@ -123,21 +128,23 @@ We will create a Lambda function that deletes all items with the specified parti
     ```
 
 4. Run the following command to deploy SAM.
-    ```
+
+    ```bash
     sam build
     sam validate
     sam deploy
     ```
-    ![LambdaDeleteFunction](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/49.png?width=90pc)
+
+    ![LambdaDeleteFunction](/images/temp/1/49.png?width=90pc)
 
 5. Open [AWS Lambda console](https://ap-southeast-1.console.aws.amazon.com/lambda/home?region=ap-southeast-1#/functions).
     - Click **book_delete** function created.
-    ![LambdaDeleteFunction](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/50.png?width=90pc)
+    ![LambdaDeleteFunction](/images/temp/1/50.png?width=90pc)
     - At **book_delete** page.
       - Click **Configuration** tab.
       - Select **Permissions** on the left menu.
       - Click on the role that the function is executing.
-      ![LambdaDeleteFunction](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/51.png?width=90pc)
+      ![LambdaDeleteFunction](/images/temp/1/51.png?width=90pc)
     - At **fcj-book-shop-BookDeleteRole-...** page.
       - Check the permissions granted to the function.
-      ![LambdaDeleteFunction](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/52.png?width=90pc)
+      ![LambdaDeleteFunction](/images/temp/1/52.png?width=90pc)

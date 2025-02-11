@@ -1,6 +1,6 @@
 ---
 title : "Create GET API"
-date :  "`r Sys.Date()`" 
+date :  2025-02-11
 weight : 2
 chapter : false
 pre : " <b> 4.2. </b> "
@@ -9,14 +9,17 @@ pre : " <b> 4.2. </b> "
 
 2. Add the following script at the end of the file that creates a REST API and **GET** method.
     - Firstly, we will create **stage** parameter.
-    ```
+
+    ```yml
     stage:
       Type: String
       Default: staging
     ```
-    ![CreateGetAPI](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/67.png?width=90pc)
+
+    ![CreateGetAPI](/images/temp/1/67.png?width=90pc)
     - Next, add the following scripts to create **BookApiGet** method, **BookApiDeployment** deployment, **BookApiStage** stage and **BookApiGetInvokePermission** permission.
-    ```
+
+    ```yml
     BookApiGet:
       Type: AWS::ApiGateway::Method
       Properties:
@@ -64,25 +67,28 @@ pre : " <b> 4.2. </b> "
         Principal: apigateway.amazonaws.com
         SourceAccount: !Ref "AWS::AccountId"
     ```
-    ![CreateGetAPI](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/68.png?width=90pc)
+
+    ![CreateGetAPI](/images/temp/1/68.png?width=90pc)
 
 3. Run the following command to deploy SAM.
-    ```
+
+    ```bash
     sam build
     sam validate
     sam deploy
     ```
-    ![CreateGetAPI](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/69.png?width=90pc)
+
+    ![CreateGetAPI](/images/temp/1/69.png?width=90pc)
 
 4. Open [AWS API Gateway console](https://us-east-1.console.aws.amazon.com/apigateway/home?region=us-east-1).
     - Click **fcj-serverless-api** REST api.
-    ![PrepRestApi](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/64.png?width=90pc)
+    ![PrepRestApi](/images/temp/1/64.png?width=90pc)
     - At **fcj-serverless-api** resources page.
       - Click **Resources**.
       - Select **GET**.
       - Click **Lambda integration** and check the **books_list** function.
-      ![CreateGetAPI](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/70.png?width=90pc) 
+      ![CreateGetAPI](/images/temp/1/70.png?width=90pc)
       - Click **Stages**.
       - Select **GET**.
       - Copy and save the **Invoke URL**.
-      ![CreateGetAPI](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/71.png?width=90pc)
+      ![CreateGetAPI](/images/temp/1/71.png?width=90pc)

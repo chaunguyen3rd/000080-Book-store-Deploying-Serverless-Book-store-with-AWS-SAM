@@ -1,6 +1,6 @@
 ---
 title : "Preparations"
-date :  "`r Sys.Date()`" 
+date :  2025-02-11
 weight : 1
 chapter : false
 pre : " <b> 4.1. </b> "
@@ -11,7 +11,8 @@ In this step, we do some preparations steps to create REST APIs later.
 
 2. Add the following script at the end of the file.
     - Firstly, we will create **apiType**, **binaryMediaType** and **getOrPostPathPart** parameters.
-    ```
+
+    ```yml
     apiType:
       Type: String
       Default: REGIONAL
@@ -28,9 +29,11 @@ In this step, we do some preparations steps to create REST APIs later.
       Type: String
       Default: "{id}"
     ```
-    ![PrepRestApi](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/61.png?width=90pc)
+
+    ![PrepRestApi](/images/temp/1/61.png?width=90pc)
     - Next, we will create **BookApi** RestApi and **BookApiResource** Resource.
-    ```
+
+    ```yml
     BookApi:
       Type: AWS::ApiGateway::RestApi
       Properties:
@@ -55,29 +58,32 @@ In this step, we do some preparations steps to create REST APIs later.
         ParentId: !Ref BookApiResource
         PathPart: !Ref deletePathPart
     ```
-    ![PrepRestApi](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/62.png?width=90pc)
-    
+
+    ![PrepRestApi](/images/temp/1/62.png?width=90pc)
+
 3. Run the following command to deploy SAM.
-    ```
+
+    ```bash
     sam build
     sam validate
     sam deploy
     ```
-    ![PrepRestApi](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/63.png?width=90pc)
+
+    ![PrepRestApi](/images/temp/1/63.png?width=90pc)
 
 4. Open [AWS API Gateway console](https://us-east-1.console.aws.amazon.com/apigateway/home?region=us-east-1).
     - Click **fcj-serverless-api** REST api.
-    ![PrepRestApi](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/64.png?width=90pc)
+    ![PrepRestApi](/images/temp/1/64.png?width=90pc)
     - At **fcj-serverless-api** resources page.
       - Click **Resources**.
       - Select **/books**.
       - Check **Resource details** information.
-      ![PrepRestApi](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/65.png?width=90pc)
+      ![PrepRestApi](/images/temp/1/65.png?width=90pc)
       - Select **/{id}**.
       - Check **Resource details** information.
-      ![PrepRestApi](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/66.png?width=90pc)
+      ![PrepRestApi](/images/temp/1/66.png?width=90pc)
       - Click **API settings**.
       - Check **multipart/form-data** Media type at **Binary media types**.
-      ![PrepRestApi](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/84.png?width=90pc)
+      ![PrepRestApi](/images/temp/1/84.png?width=90pc)
 
 So we finish some preparation steps. Next, we will create GET, POST and DELETE api.

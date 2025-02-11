@@ -1,6 +1,6 @@
 ---
 title : "Resizing image Lambda function"
-date :  "`r Sys.Date()`" 
+date :  2025-02-11
 weight : 4
 chapter : false
 pre : " <b> 3.2.4 </b> "
@@ -11,7 +11,8 @@ In this step we create a new Lambda function that resizes the image after the us
 
 2. Add the following script at the end of the file to create resizing image function.
     - Firstly, we will create **width** and **height** parameters.
-    ```
+
+    ```yml
     width:
       Type: String
       Default: 200px
@@ -20,9 +21,11 @@ In this step we create a new Lambda function that resizes the image after the us
       Type: String
       Default: 280px
     ```
-    ![LambdaResizeFunction](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/53.png?width=90pc)
+
+    ![LambdaResizeFunction](/images/temp/1/53.png?width=90pc)
     - Then, we add the following scripts to create **ImageResize** function.
-    ```
+
+    ```py
     ImageResize:
       Type: AWS::Serverless::Function
       Properties:
@@ -56,9 +59,11 @@ In this step we create a new Lambda function that resizes the image after the us
             HEIGHT: !Ref height
             DES_BUCKET: !Ref BookImageResizeShop
     ```
-    ![LambdaResizeFunction](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/54.png?width=90pc)
+
+    ![LambdaResizeFunction](/images/temp/1/54.png?width=90pc)
     - Next, add the following script at the end of the file to grant permission to the **book-image-shop-by-myself** bucket to use this function.
-    ```
+
+    ```yml
     ImageResizeInvokePermission:
       Type: "AWS::Lambda::Permission"
       Properties:
@@ -68,14 +73,16 @@ In this step we create a new Lambda function that resizes the image after the us
         SourceAccount: !Sub ${AWS::AccountId}
         SourceArn: !GetAtt BookImageShop.Arn
     ```
-    ![LambdaResizeFunction](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/55.png?width=90pc)
 
-{{% notice warning %}}
-If you create S3 bucket names that are different from the ones in the lab, please check **Policies | Resources** or **Environment** of resources and update.
-{{% /notice %}}
+    ![LambdaResizeFunction](/images/temp/1/55.png?width=90pc)
+
+    {{% notice warning %}}
+    If you create S3 bucket names that are different from the ones in the lab, please check **Policies | Resources** or **Environment** of resources and update.
+    {{% /notice %}}
 
 3. The directory structure is as follows.
-    ```
+
+    ```txt
     fcj-book-shop
     ├── fcj-book-shop
     │   ├── books_list
@@ -89,32 +96,35 @@ If you create S3 bucket names that are different from the ones in the lab, pleas
     │       └── function.zip
     └── template.yaml
     ```
+
     - Create **resize_image** folder in **fcj-book-shop/fcj-book-shop/** folder.
     - Download the below file and copy to this folder.
 
     {{%attachments title="Source code" pattern=".*\.(zip)$"/%}}
 
 4. Run the following command to deploy SAM.
-    ```
+
+    ```bash
     sam build
     sam validate
     sam deploy
     ```
-    ![LambdaResizeFunction](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/56.png?width=90pc)
+
+    ![LambdaResizeFunction](/images/temp/1/56.png?width=90pc)
 
 5. Open [AWS Lambda console](https://ap-southeast-1.console.aws.amazon.com/lambda/home?region=ap-southeast-1#/functions).
     - Click **resize_image** function created.
-    ![LambdaResizeFunction](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/57.png?width=90pc)
+    ![LambdaResizeFunction](/images/temp/1/57.png?width=90pc)
     - At **resize_image** page.
       - Click **Configuration** tab.
       - Select **Triggers** on the left menu.
       - Click **Details**.
       - Check **s3:ObjectCreated** detail that we created before.
-      ![LambdaResizeFunction](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/60.png?width=90pc)
+      ![LambdaResizeFunction](/images/temp/1/60.png?width=90pc)
       - Click **Configuration** tab.
       - Select **Permissions** on the left menu.
       - Click on the role that the function is executing.
-      ![LambdaResizeFunction](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/58.png?width=90pc)
+      ![LambdaResizeFunction](/images/temp/1/58.png?width=90pc)
     - At **fcj-book-shop-ImageResizeRole-...** page.
       - Check the permissions granted to the function.
-      ![LambdaResizeFunction](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/59.png?width=90pc)
+      ![LambdaResizeFunction](/images/temp/1/59.png?width=90pc)

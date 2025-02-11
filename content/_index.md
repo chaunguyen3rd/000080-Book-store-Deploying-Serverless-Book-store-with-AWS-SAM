@@ -1,9 +1,10 @@
 ---
 title : "Serverless - Deploying applications with SAM"
-date :  "`r Sys.Date()`" 
+date :  2025-02-11
 weight : 1 
 chapter : false
 ---
+
 # Serverless - Deploying applications with SAM
 
 #### Overview
@@ -14,14 +15,14 @@ In this workshop 3, we will rebuild the web application in workshop 2 with AWS S
 
 The architecture of the application we will build:
 
-![WebArchitect](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/serverless-architect-diagram.png?featherlight=false&width=50pc)
+![WebArchitect](/images/serverless-architect-diagram.png?featherlight=false&width=50pc)
 
 #### Content
 
- 1. [Preparation](1-preparation/)
- 2. [Front-end deployment](2-front-end-deployment/)
- 3. [Deploy Lambda function](3-deploy-lambda-function/)
- 4. [Config API Gateway](4-config-api-gw/)
- 5. [Test API by Postman](5-test-api-by-postman/)
- 6. [Test API with front-end](6-test-front-end/)
- 7. [Cleanup](7-cleanup)
+1. [Preparation](1-preparation/)
+2. [Front-end deployment](2-front-end-deployment/)
+3. [Deploy Lambda function](3-deploy-lambda-function/)
+4. [Config API Gateway](4-config-api-gw/)
+5. [Test API by Postman](5-test-api-by-postman/)
+6. [Test API with front-end](6-test-front-end/)
+7. [Cleanup](7-cleanup)

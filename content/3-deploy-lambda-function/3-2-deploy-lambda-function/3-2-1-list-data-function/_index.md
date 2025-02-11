@@ -1,6 +1,6 @@
 ---
 title : "Listing Lambda function"
-date :  "`r Sys.Date()`" 
+date :  2025-02-11
 weight : 1
 chapter : false
 pre : " <b> 3.2.1 </b> "
@@ -10,7 +10,8 @@ We will create a Lambda function that reads all the data in the DynamoDB table.
 1. Open **template.yaml** file in **fcj-book-shop** folder.
 
 2. Add the following script at the end of the file.
-    ```
+
+    ```yml
     BooksList:
     Type: AWS::Serverless::Function
     Properties:
@@ -33,10 +34,12 @@ We will create a Lambda function that reads all the data in the DynamoDB table.
               Resource:
                 - !Sub arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/${booksTableName}
     ```
-    ![LambdaListFunction](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/33.png?width=90pc)
+
+    ![LambdaListFunction](/images/temp/1/33.png?width=90pc)
 
 3. The directory structure is as follows.
-    ```
+
+    ```txt
     fcj-book-shop
     ├── fcj-book-shop
     │   ├── books_list
@@ -44,9 +47,11 @@ We will create a Lambda function that reads all the data in the DynamoDB table.
     └── template.yaml
 
     ```
+
     - Create **fcj-book-shop/books_list** folder in **fcj-book-shop** folder.
     - Create **books_list.py** file and copy the below code block to it.
-    ```
+
+    ```py
     import boto3
     import os
     import simplejson as json
@@ -99,21 +104,23 @@ We will create a Lambda function that reads all the data in the DynamoDB table.
     ```
 
 4. Run the following command to deploy SAM.
-    ```
+
+    ```bash
     sam build
     sam validate
     sam deploy
     ```
-    ![LambdaListFunction](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/34.png?width=90pc)
+
+    ![LambdaListFunction](/images/temp/1/34.png?width=90pc)
 
 5. Open [AWS Lambda console](https://ap-southeast-1.console.aws.amazon.com/lambda/home?region=ap-southeast-1#/functions).
     - Click **books_list** function created.
-    ![LambdaListFunction](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/35.png?width=90pc)
+    ![LambdaListFunction](/images/temp/1/35.png?width=90pc)
     - At **books_list** page.
       - Click **Configuration** tab.
       - Select **Permissions** on the left menu.
       - Click on the role that the function is executing.
-      ![LambdaListFunction](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/36.png?width=90pc)
+      ![LambdaListFunction](/images/temp/1/36.png?width=90pc)
     - At **fcj-book-shop-BooksListRole-...** page.
       - Check the permissions granted to the function.
-      ![LambdaListFunction](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/37.png?width=90pc)
+      ![LambdaListFunction](/images/temp/1/37.png?width=90pc)

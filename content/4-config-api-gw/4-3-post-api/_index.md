@@ -1,6 +1,6 @@
 ---
 title : "Create POST API"
-date :  "`r Sys.Date()`" 
+date :  2025-02-11
 weight : 3
 chapter : false
 pre : " <b> 4.3. </b> "
@@ -9,7 +9,8 @@ pre : " <b> 4.3. </b> "
 
 2. Add the following script at the end of the file that creates the **POST** method.
     - Firstly, we need to refresh to create a new deployment version for **POST** Api in a few next steps. Comment **BookApiDeployment** block.
-    ```
+
+    ```yml
     # BookApiDeployment:
     #   Type: AWS::ApiGateway::Deployment
     #   Properties:
@@ -24,16 +25,20 @@ pre : " <b> 4.3. </b> "
         StageName: !Ref stage
         # DeploymentId: !Ref BookApiDeployment
     ```
-    ![CreatePostAPI](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/72.png?&width=90pc)
+
+    ![CreatePostAPI](/images/temp/1/72.png?&width=90pc)
     - Run the following command to deploy SAM.
-    ```
+
+    ```bash
     sam build
     sam validate
     sam deploy
     ```
-    ![CreatePostAPI](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/73.png?&width=90pc)
+
+    ![CreatePostAPI](/images/temp/1/73.png?&width=90pc)
     - Next, we will create **BookApiCreate** and **BookApiCreateInvokePermission**.
-    ```
+
+    ```yml
     BookApiCreate:
       Type: AWS::ApiGateway::Method
       Properties:
@@ -67,9 +72,11 @@ pre : " <b> 4.3. </b> "
         Principal: apigateway.amazonaws.com
         SourceAccount: !Ref "AWS::AccountId"
     ```
-    ![CreatePostAPI](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/74.png?&width=90pc)
+
+    ![CreatePostAPI](/images/temp/1/74.png?&width=90pc)
     - Then, we uncomment the codeblock that we commented above.
-    ```
+
+    ```yml
     BookApiDeployment:
       Type: AWS::ApiGateway::Deployment
       Properties:
@@ -85,25 +92,28 @@ pre : " <b> 4.3. </b> "
         StageName: !Ref stage
         DeploymentId: !Ref BookApiDeployment
     ```
-    ![CreatePostAPI](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/75.png?&width=90pc)
+
+    ![CreatePostAPI](/images/temp/1/75.png?&width=90pc)
 
 3. Run the following command to deploy SAM.
-    ```
+
+    ```bash
     sam build
     sam validate
     sam deploy
     ```
-    ![CreatePostAPI](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/76.png?&width=90pc)
+
+    ![CreatePostAPI](/images/temp/1/76.png?&width=90pc)
 
 4. Open [AWS API Gateway console](https://us-east-1.console.aws.amazon.com/apigateway/home?region=us-east-1).
     - Click **fcj-serverless-api** REST api.
-    ![PrepRestApi](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/64.png?width=90pc)
+    ![PrepRestApi](/images/temp/1/64.png?width=90pc)
     - At **fcj-serverless-api** resources page.
       - Click **Resources**.
       - Select **POST**.
       - Click **Lambda integration** and check the **book_create** function.
-      ![CreatePostAPI](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/77.png?&width=90pc)
+      ![CreatePostAPI](/images/temp/1/77.png?&width=90pc)
       - Click **Stages**.
       - Select **POST**.
       - Copy and save the **Invoke URL**.
-      ![CreatePostAPI](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/78.png?&width=90pc)
+      ![CreatePostAPI](/images/temp/1/78.png?&width=90pc)

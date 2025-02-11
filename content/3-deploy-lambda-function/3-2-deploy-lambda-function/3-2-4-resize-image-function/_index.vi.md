@@ -1,6 +1,6 @@
 ---
 title : "Lambda function chỉnh ảnh"
-date :  "`r Sys.Date()`" 
+date :  2025-02-11
 weight : 4
 chapter : false
 pre : " <b> 3.2.4 </b> "
@@ -11,7 +11,8 @@ Trong bước này, chúng ta sẽ tạo một hàm Lambda mới để chỉnh k
 
 2. Thêm đoạn mã sau vào cuối file để tạo hàm chỉnh kích thước ảnh.
     - Đầu tiên, chúng ta sẽ tạo các tham số **width** và **height**.
-    ```
+
+    ```yml
     width:
       Type: String
       Default: 200px
@@ -20,9 +21,11 @@ Trong bước này, chúng ta sẽ tạo một hàm Lambda mới để chỉnh k
       Type: String
       Default: 280px
     ```
-    ![LambdaResizeFunction](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/53.png?width=90pc)
+
+    ![LambdaResizeFunction](/images/temp/1/53.png?width=90pc)
     - Sau đó, chúng ta thêm các đoạn mã sau để tạo hàm **ImageResize**.
-    ```
+
+    ```yml
     ImageResize:
       Type: AWS::Serverless::Function
       Properties:
@@ -56,9 +59,11 @@ Trong bước này, chúng ta sẽ tạo một hàm Lambda mới để chỉnh k
             HEIGHT: !Ref height
             DES_BUCKET: !Ref BookImageResizeShop
     ```
-    ![LambdaResizeFunction](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/54.png?width=90pc)
+
+    ![LambdaResizeFunction](/images/temp/1/54.png?width=90pc)
     - Tiếp theo, thêm đoạn mã sau vào cuối file để cấp quyền cho bucket **book-image-shop-by-myself** sử dụng hàm này.
-    ```
+
+    ```yml
     ImageResizeInvokePermission:
       Type: "AWS::Lambda::Permission"
       Properties:
@@ -68,14 +73,16 @@ Trong bước này, chúng ta sẽ tạo một hàm Lambda mới để chỉnh k
         SourceAccount: !Sub ${AWS::AccountId}
         SourceArn: !GetAtt BookImageShop.Arn
     ```
-    ![LambdaResizeFunction](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/55.png?width=90pc)
 
-{{% notice warning %}}
-Nếu bạn tạo tên bucket S3 khác với tên trong bài lab, vui lòng kiểm tra **Chính sách | Tài nguyên** hoặc **Môi trường** của các tài nguyên và cập nhật.
-{{% /notice %}}
+    ![LambdaResizeFunction](/images/temp/1/55.png?width=90pc)
+
+    {{% notice warning %}}
+    Nếu bạn tạo tên bucket S3 khác với tên trong bài lab, vui lòng kiểm tra **Chính sách | Tài nguyên** hoặc **Môi trường** của các tài nguyên và cập nhật.
+    {{% /notice %}}
 
 3. Cấu trúc thư mục như sau.
-    ```
+
+    ```txt
     fcj-book-shop
     ├── fcj-book-shop
     │   ├── books_list
@@ -89,32 +96,35 @@ Nếu bạn tạo tên bucket S3 khác với tên trong bài lab, vui lòng ki�
     │       └── function.zip
     └── template.yaml
     ```
+
     - Tạo thư mục **resize_image** trong thư mục **fcj-book-shop/fcj-book-shop/**.
     - Tải file dưới đây và sao chép vào thư mục này.
 
     {{%attachments title="Source code" pattern=".*\.(zip)$"/%}}
 
 4. Chạy lệnh sau để triển khai SAM.
-    ```
+
+    ```bash
     sam build
     sam validate
     sam deploy
     ```
-    ![LambdaResizeFunction](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/56.png?width=90pc)
+
+    ![LambdaResizeFunction](/images/temp/1/56.png?width=90pc)
 
 5. Mở [AWS Lambda console](https://ap-southeast-1.console.aws.amazon.com/lambda/home?region=ap-southeast-1#/functions).
     - Nhấp vào hàm **resize_image** đã tạo.
-    ![LambdaResizeFunction](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/57.png?width=90pc)
+    ![LambdaResizeFunction](/images/temp/1/57.png?width=90pc)
     - Tại trang **resize_image**.
       - Nhấp vào tab **Configuration**.
       - Chọn **Triggers** trong menu bên trái.
       - Nhấp vào **Details**.
       - Kiểm tra chi tiết **s3:ObjectCreated** mà chúng ta đã tạo trước đó.
-      ![LambdaResizeFunction](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/60.png?width=90pc)
+      ![LambdaResizeFunction](/images/temp/1/60.png?width=90pc)
       - Nhấp vào tab **Configuration**.
       - Chọn **Permissions** trong menu bên trái.
-      - Nhấp vào vai trò mà hàm đang thực thi.     
-      ![LambdaResizeFunction](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/58.png?width=90pc)
+      - Nhấp vào vai trò mà hàm đang thực thi.
+      ![LambdaResizeFunction](/images/temp/1/58.png?width=90pc)
     - Tại trang **fcj-book-shop-ImageResizeRole-...**.
-      - Kiểm tra các quyền đã được cấp cho hàm.     
-      ![LambdaResizeFunction](/000080-Book-store-Deploying-Serverless-Book-store-with-AWS-SAM/images/temp/1/59.png?width=90pc)
+      - Kiểm tra các quyền đã được cấp cho hàm.
+      ![LambdaResizeFunction](/images/temp/1/59.png?width=90pc)
