@@ -63,69 +63,69 @@ We will create a Lambda function that deletes all items with the specified parti
     - Create **book_delete** folder in **fcj-book-shop/fcj-book-shop/** folder.
     - Create **book_delete.py** file and copy the below code block to it.
 
-    ```py
-    import boto3
-    import os
+      ```py
+      import boto3
+      import os
 
-    BUCKET = os.environ['BUCKET_NAME']
-    TABLE = os.environ['TABLE_NAME']
+      BUCKET = os.environ['BUCKET_NAME']
+      TABLE = os.environ['TABLE_NAME']
 
-    s3_client = boto3.client('s3')
-    dynamodb = boto3.resource('dynamodb')
-    table = dynamodb.Table(TABLE)
+      s3_client = boto3.client('s3')
+      dynamodb = boto3.resource('dynamodb')
+      table = dynamodb.Table(TABLE)
 
-    header_res = {
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "OPTIONS,POST,GET,DELETE",
-        "Access-Control-Allow-Headers": "Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token",
-    }
+      header_res = {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Methods": "OPTIONS,POST,GET,DELETE",
+          "Access-Control-Allow-Headers": "Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token",
+      }
 
 
-    def lambda_handler(event, context):
-        delete_id = event.get('pathParameters', {})
-        delete_id['rv_id'] = 0
+      def lambda_handler(event, context):
+          delete_id = event.get('pathParameters', {})
+          delete_id['rv_id'] = 0
 
-        try:
-            # Get item from id
-            try:
-                delete_item = table.get_item(Key=delete_id)
-                image_path = delete_item['Item'].get('image', '')
-                image_name = image_path.split('/')[-1]
+          try:
+              # Get item from id
+              try:
+                  delete_item = table.get_item(Key=delete_id)
+                  image_path = delete_item['Item'].get('image', '')
+                  image_name = image_path.split('/')[-1]
 
-            except Exception as e:
-                print(f"Error getting item with that {delete_id['id']}")
-                raise Exception(f"Error getting item with that {delete_id['id']}")
+              except Exception as e:
+                  print(f"Error getting item with that {delete_id['id']}")
+                  raise Exception(f"Error getting item with that {delete_id['id']}")
 
-            # Delete item in DynamoDB and s3 bucket
-            try:
-                items_with_same_id = table.query(
-                    TableName=TABLE,
-                    ProjectionExpression='rv_id',
-                    KeyConditionExpression='id = :id',
-                    ExpressionAttributeValues={':id': delete_id['id']}
-                )
+              # Delete item in DynamoDB and s3 bucket
+              try:
+                  items_with_same_id = table.query(
+                      TableName=TABLE,
+                      ProjectionExpression='rv_id',
+                      KeyConditionExpression='id = :id',
+                      ExpressionAttributeValues={':id': delete_id['id']}
+                  )
 
-                for item in items_with_same_id['Items']:
-                    delete_id['rv_id'] = item['rv_id']
-                    table.delete_item(Key=delete_id)
+                  for item in items_with_same_id['Items']:
+                      delete_id['rv_id'] = item['rv_id']
+                      table.delete_item(Key=delete_id)
 
-                s3_client.delete_object(Bucket=BUCKET, Key=image_name)
+                  s3_client.delete_object(Bucket=BUCKET, Key=image_name)
 
-            except Exception as e:
-                print(f"Error getting item with that {delete_id['id']}")
-                raise Exception(f"Error getting item with that {delete_id['id']}")
+              except Exception as e:
+                  print(f"Error getting item with that {delete_id['id']}")
+                  raise Exception(f"Error getting item with that {delete_id['id']}")
 
-            return {
-                'statusCode': 200,
-                'body': 'Successfully delete item!',
-                'headers': header_res
-            }
+              return {
+                  'statusCode': 200,
+                  'body': 'Successfully delete item!',
+                  'headers': header_res
+              }
 
-        except Exception as e:
-            print(f'Error deleting item: {e}')
-            raise Exception(f'Error deleting item: {e}')
-    ```
+          except Exception as e:
+              print(f'Error deleting item: {e}')
+              raise Exception(f'Error deleting item: {e}')
+      ```
 
 4. Run the following command to deploy SAM.
 
@@ -139,12 +139,12 @@ We will create a Lambda function that deletes all items with the specified parti
 
 5. Open [AWS Lambda console](https://ap-southeast-1.console.aws.amazon.com/lambda/home?region=ap-southeast-1#/functions).
     - Click **book_delete** function created.
-    ![LambdaDeleteFunction](/images/temp/1/50.png?width=90pc)
+      ![LambdaDeleteFunction](/images/temp/1/50.png?width=90pc)
     - At **book_delete** page.
       - Click **Configuration** tab.
       - Select **Permissions** on the left menu.
       - Click on the role that the function is executing.
-      ![LambdaDeleteFunction](/images/temp/1/51.png?width=90pc)
+        ![LambdaDeleteFunction](/images/temp/1/51.png?width=90pc)
     - At **fcj-book-shop-BookDeleteRole-...** page.
       - Check the permissions granted to the function.
-      ![LambdaDeleteFunction](/images/temp/1/52.png?width=90pc)
+        ![LambdaDeleteFunction](/images/temp/1/52.png?width=90pc)

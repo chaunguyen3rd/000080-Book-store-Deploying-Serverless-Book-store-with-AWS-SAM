@@ -61,13 +61,13 @@ pre : " <b> 3.1 </b> "
 
 4. Quay lại bảng điều khiển DynamoDB. Tại trang **Tables**.
     - Nhấp vào bảng **Books**.
-    ![CreateDynamoDBTable](/images/temp/1/29.png?width=90pc)
+      ![CreateDynamoDBTable](/images/temp/1/29.png?width=90pc)
     - Tại trang **Books**.
       - Kiểm tra thông tin của bảng này.
-      ![CreateDynamoDBTable](/images/temp/1/30.png?width=90pc)
+        ![CreateDynamoDBTable](/images/temp/1/30.png?width=90pc)
       - Nhấp vào tab **Indexes**.
       - Kiểm tra thông tin **Local secondary indexes**.
-      ![CreateDynamoDBTable](/images/temp/1/31.png?width=90pc)
+        ![CreateDynamoDBTable](/images/temp/1/31.png?width=90pc)
       Vậy là bạn đã tạo bảng **Books** với chỉ mục phụ cục bộ **name-index**.
 
 5. Để thêm dữ liệu vào bảng, bạn có thể tải xuống tệp dưới đây. Sau đó, mở tệp và thay thế tất cả **AWS-REGION** bằng vùng mà bạn đã tạo S3 bucket - **book-image-resize-shop-by-myself**, chẳng hạn như: `us-east-1`.

@@ -13,7 +13,7 @@ Trong bước này, chúng ta sẽ kiểm tra hoạt động của các API bằ
     - Chọn giao thức **GET**.
     - Nhập URL của API liệt kê mà lưu lại từ bước trước.
     - Nhấn vào **Send**.
-![TestListAPI](/images/temp/1/85.png?width=90pc)
+      ![TestListAPI](/images/temp/1/85.png?width=90pc)
 Kết quả trả về là toàn bộ dữ liệu của bảng **Books** đã qua xử lý.
 
 #### Kiểm tra API ghi
@@ -32,13 +32,13 @@ Kết quả trả về là toàn bộ dữ liệu của bảng **Books** đã qu
       - description: Amazon Web Services in Action, Second Edition is a comprehensive introduction to computing, storing, and networking in the AWS cloud. You'll find clear, relevant coverage of all the essential AWS services you to know, emphasizing best practices for security, high availability and scalability
       - image: aws-logo.png
     - Nhấn nút **Send**. Đợi một lúc, xem kết quả trả về **Successfully created item**.
-![TestListAPI](/images/temp/1/86.png?width=90pc)
+      ![TestListAPI](/images/temp/1/86.png?width=90pc)
 
 2. Mở bảng **Books** ở bảng điều khiển DynamoDB để kiểm tra dữ liệu.
     - Trước khi gọi API ghi.
-  ![TestListAPI](/images/temp/1/87.png?width=90pc)
+      ![TestListAPI](/images/temp/1/87.png?width=90pc)
     - Sau khi gọi API ghi.
-  ![TestListAPI](/images/temp/1/88.png?width=90pc)
+      ![TestListAPI](/images/temp/1/88.png?width=90pc)
 
 #### Kiểm tra API xoá
 
@@ -46,10 +46,10 @@ Kết quả trả về là toàn bộ dữ liệu của bảng **Books** đã qu
     - Chọn giao thức **DELETE**.
     - Nhập URL của API liệt kê mà lưu lại từ bước trước. Thay thế **{id}** thành book_id mà bạn muốn xóa, ví dụ **5**.
     - Nhấn nút **Send**. Đợi một lúc, xem kết quả trả về **Successfully delete item!**.
-![TestListAPI](/images/temp/1/89.png?width=90pc)
+      ![TestListAPI](/images/temp/1/89.png?width=90pc)
 
 2. Mở bảng **Books** ở bảng điều khiển DynamoDB để kiểm tra dữ liệu.
-![TestListAPI](/images/temp/1/87.png?width=90pc)
+    ![TestListAPI](/images/temp/1/87.png?width=90pc)
 
 3. Mở bucket **book-image-resize-stores-by-myself** để kiểm tra đối tượng. **aws-logo.jpg** đã bị xóa.
-![TestListAPI](/images/temp/1/90.png?width=90pc)
+    ![TestListAPI](/images/temp/1/90.png?width=90pc)

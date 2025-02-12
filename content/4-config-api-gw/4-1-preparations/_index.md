@@ -12,54 +12,54 @@ In this step, we do some preparations steps to create REST APIs later.
 2. Add the following script at the end of the file.
     - Firstly, we will create **apiType**, **binaryMediaType** and **getOrPostPathPart** parameters.
 
-    ```yml
-    apiType:
-      Type: String
-      Default: REGIONAL
+      ```yml
+      apiType:
+        Type: String
+        Default: REGIONAL
 
-    binaryMediaType:
-      Type: String
-      Default: multipart/form-data
+      binaryMediaType:
+        Type: String
+        Default: multipart/form-data
 
-    getOrPostPathPart:
-      Type: String
-      Default: books
+      getOrPostPathPart:
+        Type: String
+        Default: books
 
-    deletePathPart:
-      Type: String
-      Default: "{id}"
-    ```
+      deletePathPart:
+        Type: String
+        Default: "{id}"
+      ```
 
-    ![PrepRestApi](/images/temp/1/61.png?width=90pc)
+      ![PrepRestApi](/images/temp/1/61.png?width=90pc)
     - Next, we will create **BookApi** RestApi and **BookApiResource** Resource.
 
-    ```yml
-    BookApi:
-      Type: AWS::ApiGateway::RestApi
-      Properties:
-        Name: fcj-serverless-api
-        EndpointConfiguration:
-          Types:
-            - !Ref apiType
-        BinaryMediaTypes:
-          - !Ref binaryMediaType
+      ```yml
+      BookApi:
+        Type: AWS::ApiGateway::RestApi
+        Properties:
+          Name: fcj-serverless-api
+          EndpointConfiguration:
+            Types:
+              - !Ref apiType
+          BinaryMediaTypes:
+            - !Ref binaryMediaType
 
-    BookApiResource:
-      Type: AWS::ApiGateway::Resource
-      Properties:
-        RestApiId: !Ref BookApi
-        ParentId: !GetAtt BookApi.RootResourceId
-        PathPart: !Ref getOrPostPathPart
+      BookApiResource:
+        Type: AWS::ApiGateway::Resource
+        Properties:
+          RestApiId: !Ref BookApi
+          ParentId: !GetAtt BookApi.RootResourceId
+          PathPart: !Ref getOrPostPathPart
 
-    BookDeleteApiResource:
-      Type: AWS::ApiGateway::Resource
-      Properties:
-        RestApiId: !Ref BookApi
-        ParentId: !Ref BookApiResource
-        PathPart: !Ref deletePathPart
-    ```
+      BookDeleteApiResource:
+        Type: AWS::ApiGateway::Resource
+        Properties:
+          RestApiId: !Ref BookApi
+          ParentId: !Ref BookApiResource
+          PathPart: !Ref deletePathPart
+      ```
 
-    ![PrepRestApi](/images/temp/1/62.png?width=90pc)
+      ![PrepRestApi](/images/temp/1/62.png?width=90pc)
 
 3. Run the following command to deploy SAM.
 
@@ -73,17 +73,17 @@ In this step, we do some preparations steps to create REST APIs later.
 
 4. Open [AWS API Gateway console](https://us-east-1.console.aws.amazon.com/apigateway/home?region=us-east-1).
     - Click **fcj-serverless-api** REST api.
-    ![PrepRestApi](/images/temp/1/64.png?width=90pc)
+      ![PrepRestApi](/images/temp/1/64.png?width=90pc)
     - At **fcj-serverless-api** resources page.
       - Click **Resources**.
       - Select **/books**.
       - Check **Resource details** information.
-      ![PrepRestApi](/images/temp/1/65.png?width=90pc)
+        ![PrepRestApi](/images/temp/1/65.png?width=90pc)
       - Select **/{id}**.
       - Check **Resource details** information.
-      ![PrepRestApi](/images/temp/1/66.png?width=90pc)
+        ![PrepRestApi](/images/temp/1/66.png?width=90pc)
       - Click **API settings**.
       - Check **multipart/form-data** Media type at **Binary media types**.
-      ![PrepRestApi](/images/temp/1/84.png?width=90pc)
+        ![PrepRestApi](/images/temp/1/84.png?width=90pc)
 
 So we finish some preparation steps. Next, we will create GET, POST and DELETE api.

@@ -61,13 +61,13 @@ pre : " <b> 3.1 </b> "
 
 4. Back to DynamoDB console. At **Tables** page.
     - Click **Books** table.
-    ![CreateDynamoDBTable](/images/temp/1/29.png?width=90pc)
+      ![CreateDynamoDBTable](/images/temp/1/29.png?width=90pc)
     - At **Books** page.
       - Check information of this table.
-      ![CreateDynamoDBTable](/images/temp/1/30.png?width=90pc)
+        ![CreateDynamoDBTable](/images/temp/1/30.png?width=90pc)
       - Click **Indexes** tab.
       - Check the **Local secondary indexes** information.
-      ![CreateDynamoDBTable](/images/temp/1/31.png?width=90pc)
+        ![CreateDynamoDBTable](/images/temp/1/31.png?width=90pc)
       So you have created the **Books** table with the Local secondary index **name-index**.
 
 5. To add data to the table, you can download the below file. Then, open file and replace all **AWS-REGION** with the region that create S3 bucket - **book-image-resize-shop-by-myself**, such as: `us-east-1`.
