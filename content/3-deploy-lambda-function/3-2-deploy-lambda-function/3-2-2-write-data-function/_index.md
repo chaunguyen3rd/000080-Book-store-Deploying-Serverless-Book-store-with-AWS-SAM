@@ -111,9 +111,7 @@ In this step we create a new Lambda function to write data to DynamoDB on SAM.
 
       ![LambdaCreateFunction](/images/temp/1/40.png?width=90pc)
 
-    {{% notice warning %}}
-    If you create S3 bucket name is different from the one in the lab, please update **Policies | Resources** of **book_create** function with that name.
-    {{% /notice %}}
+      > If you create S3 bucket name is different from the one in the lab, please update **Policies | Resources** of **book_create** function with that name.
 
 3. The directory structure is as follows.
 

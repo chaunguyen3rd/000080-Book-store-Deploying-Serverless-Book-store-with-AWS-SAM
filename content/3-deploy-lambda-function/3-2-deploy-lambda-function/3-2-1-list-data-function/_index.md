@@ -13,26 +13,26 @@ We will create a Lambda function that reads all the data in the DynamoDB table.
 
     ```yml
     BooksList:
-    Type: AWS::Serverless::Function
-    Properties:
-      CodeUri: fcj-book-shop/books_list
-      Handler: books_list.lambda_handler
-      Runtime: python3.11
-      FunctionName: books_list
-      Environment:
-        Variables:
-          TABLE_NAME: !Ref BooksTable
-      Architectures:
-        - x86_64
-      Policies:
-        - Statement:
-            - Sid: ReadDynamoDB
-              Effect: Allow
-              Action:
-                - dynamodb:Scan
-                - dynamodb:Query
-              Resource:
-                - !Sub arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/${booksTableName}
+      Type: AWS::Serverless::Function
+      Properties:
+        CodeUri: fcj-book-shop/books_list
+        Handler: books_list.lambda_handler
+        Runtime: python3.11
+        FunctionName: books_list
+        Environment:
+          Variables:
+            TABLE_NAME: !Ref BooksTable
+        Architectures:
+          - x86_64
+        Policies:
+          - Statement:
+              - Sid: ReadDynamoDB
+                Effect: Allow
+                Action:
+                  - dynamodb:Scan
+                  - dynamodb:Query
+                Resource:
+                  - !Sub arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/${booksTableName}
     ```
 
     ![LambdaListFunction](/images/temp/1/33.png?width=90pc)
@@ -104,6 +104,7 @@ We will create a Lambda function that reads all the data in the DynamoDB table.
       ```
 
 4. Run the following command to deploy SAM.
+    > If you have issues with Python version, following this instruction for setting up an virtual Python environment: [pyenv Github page](<https://github.com/pyenv/pyenv>).
 
     ```bash
     sam build

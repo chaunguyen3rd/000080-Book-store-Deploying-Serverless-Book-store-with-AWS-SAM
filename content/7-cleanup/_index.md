@@ -12,13 +12,15 @@ pre : " <b> 7. </b> "
     - Click **Empty**.
     - Enter **permanently delete**.
     - Click **Empty**.
-    - Do the same for bucket starting with **aws-sam-cli-managed-default-**.
+    - Do the same for bucket starting with **aws-sam-cli-managed-default-**, **book-image-shop-by-myself** and **book-image-resize-shop-by-myself**.
 
 2. Delete CloudFormation stacks.
 
     - Execute the below command to delete the AWS SAM application.
 
       ```bash
-      sam delete --stack-name fcj-book-store
+      sam delete --stack-name fcj-book-shop
       sam delete --stack-name aws-sam-cli-managed-default
       ```
+
+    - If you have issues when deleting with command. Open [AWS Cloudformation console](https://us-east-1.console.aws.amazon.com/cloudformation/home?region=us-east-1#/getting-started). Then, delete all stacks related to this workshop.

@@ -111,9 +111,7 @@ Trong bước này, chúng ta sẽ tạo một hàm Lambda mới để ghi dữ 
 
       ![LambdaCreateFunction](/images/temp/1/40.png?width=90pc)
 
-    {{% notice warning %}}
-    Nếu tên S3 bucket bạn tạo khác với tên trong bài lab, vui lòng cập nhật **Chính sách | Tài nguyên** của hàm **book_create** bằng tên đó.
-    {{% /notice %}}
+      > If you create S3 bucket name is different from the one in the lab, please update **Policies | Resources** of **book_create** function with that name.
 
 3. Cấu trúc thư mục như sau.
 

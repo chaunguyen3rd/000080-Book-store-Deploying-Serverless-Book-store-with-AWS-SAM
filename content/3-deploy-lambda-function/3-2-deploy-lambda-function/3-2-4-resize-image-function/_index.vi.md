@@ -76,9 +76,7 @@ Trong bước này, chúng ta sẽ tạo một hàm Lambda mới để chỉnh k
 
       ![LambdaResizeFunction](/images/temp/1/55.png?width=90pc)
 
-    {{% notice warning %}}
-    Nếu bạn tạo tên bucket S3 khác với tên trong bài lab, vui lòng kiểm tra **Chính sách | Tài nguyên** hoặc **Môi trường** của các tài nguyên và cập nhật.
-    {{% /notice %}}
+      > Nếu bạn tạo tên bucket S3 khác với tên trong bài lab, vui lòng kiểm tra **Chính sách | Tài nguyên** hoặc **Môi trường** của các tài nguyên và cập nhật.
 
 3. Cấu trúc thư mục như sau.
 

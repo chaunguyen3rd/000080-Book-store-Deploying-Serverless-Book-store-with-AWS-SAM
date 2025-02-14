@@ -51,18 +51,36 @@ pre : " <b> 4.4. </b> "
             IntegrationHttpMethod: POST # For Lambda integrations, you must set the integration method to POST
             Uri: !Sub >-
               arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${BookDelete.Arn}/invocations
+          MethodResponses:
+            - StatusCode: "200"
+              ResponseParameters:
+                method.response.header.Access-Control-Allow-Origin: true
+                method.response.header.Access-Control-Allow-Methods: true
+                method.response.header.Access-Control-Allow-Headers: true
+
+      BookApiDeleteOptions:
+        Type: AWS::ApiGateway::Method
+        Properties:
+          HttpMethod: OPTIONS
+          RestApiId: !Ref BookApi
+          ResourceId: !Ref BookDeleteApiResource
+          AuthorizationType: NONE
+          Integration:
+            Type: MOCK
+            RequestTemplates:
+              application/json: '{"statusCode": 200}'
             IntegrationResponses:
               - StatusCode: "200"
                 ResponseParameters:
                   method.response.header.Access-Control-Allow-Origin: "'*'"
-                  method.response.header.Access-Control-Allow-Methods: "'DELETE,OPTIONS'"
+                  method.response.header.Access-Control-Allow-Methods: "'GET,POST,OPTIONS,DELETE'"
                   method.response.header.Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'"
           MethodResponses:
             - StatusCode: "200"
               ResponseParameters:
-                method.response.header.Access-Control-Allow-Origin: "'*'"
-                method.response.header.Access-Control-Allow-Methods: "'DELETE,OPTIONS'"
-                method.response.header.Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'"
+                method.response.header.Access-Control-Allow-Origin: true
+                method.response.header.Access-Control-Allow-Methods: true
+                method.response.header.Access-Control-Allow-Headers: true
 
       BookApiDeleteInvokePermission:
         Type: AWS::Lambda::Permission

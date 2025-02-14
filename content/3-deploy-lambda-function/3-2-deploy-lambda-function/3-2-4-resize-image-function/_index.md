@@ -76,9 +76,7 @@ In this step we create a new Lambda function that resizes the image after the us
 
       ![LambdaResizeFunction](/images/temp/1/55.png?width=90pc)
 
-    {{% notice warning %}}
-    If you create S3 bucket names that are different from the ones in the lab, please check **Policies | Resources** or **Environment** of resources and update.
-    {{% /notice %}}
+      > If you create S3 bucket names that are different from the ones in the lab, please check **Policies | Resources** or **Environment** of resources and update.
 
 3. The directory structure is as follows.
 
