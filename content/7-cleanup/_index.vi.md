@@ -12,7 +12,7 @@ pre : " <b> 7. </b> "
     - Nhấn **Empty**.
     - Nhập **permanently delete**.
     - Nhấn **Empty**.
-    - Thực hiện tương tự với bucket bắt đầu bằng **aws-sam-cli-managed-default-**.
+    - Thực hiện tương tự với bucket bắt đầu bằng **aws-sam-cli-managed-default-**, **book-image-shop-by-myself** and **book-image-resize-shop-by-myself**.
 
 2. Xóa các stack CloudFormation.
 
@@ -22,3 +22,5 @@ pre : " <b> 7. </b> "
       sam delete --stack-name fcj-book-shop
       sam delete --stack-name aws-sam-cli-managed-default
       ```
+
+    - Nếu bạn gặp lỗi với các command xóa trên. Mở [AWS Cloudformation console](https://us-east-1.console.aws.amazon.com/cloudformation/home?region=us-east-1#/getting-started). Sau đó, xóa tất cả các stacks liên quan đến bài workshop này.
