@@ -12,16 +12,10 @@ After testing that the APIs work properly with Postman, we will test the APIs th
       ![CreateRestAPI](/images/temp/1/91.png?width=90pc)
       ![CreateRestAPI](/images/temp/1/92.png?width=90pc)
 
-2. Open **package.json** in **fcj-serverless-frontend** folder that downloaded from part 2.
-    - Change the value of **"proxy"** to your API gateway Invoke URL.
-    > Make sure you follow the url pattern as below.
-
-      ![CreateRestAPI](/images/temp/1/103.png?width=90pc)
-
-3. Open **App.js** in **fcj-serverless-frontend/src/**, change value of **isAdmin** with **true**.
+2. Open **App.js** in **fcj-serverless-frontend/src/**, change value of **isAdmin** with **true**.
     ![CreateRestAPI](/images/temp/1/93.png?width=90pc)
 
-4. Run the code below in your terminal.
+3. Run the code below in your terminal.
 
     ```bash
     yarn build
@@ -29,11 +23,11 @@ After testing that the APIs work properly with Postman, we will test the APIs th
     aws s3 cp build s3://fcj-book-shop-by-myself --recursive
     ```
 
-5. Paste the endpoint of S3 static web into your browser. The app already shows the book information, but still no pictures because we haven't uploaded the pictures yet.
+4. Paste the endpoint of S3 static web into your browser. The app already shows the book information, but still no pictures because we haven't uploaded the pictures yet.
     ![CreateRestAPI](/images/temp/1/94.png?width=90pc)
 So the listing API is working properly.
 
-6. Test writing API.
+5. Test writing API.
     - Click **Management** tab.
     - Click **Update**.
       ![CreateRestAPI](/images/temp/1/95.png?width=90pc)
@@ -63,7 +57,7 @@ So the listing API is working properly.
     - Display newly created information.
       ![CreateRestAPI](/images/temp/1/99.png?width=90pc)
 
-7. Test the deleting API.
+6. Test the deleting API.
     - Click **Management** tab.
     - Click **Update**.
       ![CreateRestAPI](/images/temp/1/100.png?width=90pc)

@@ -12,16 +12,10 @@ Sau khi kiểm tra rằng các API hoạt động đúng với Postman, chúng t
       ![CreateRestAPI](/images/temp/1/91.png?width=90pc)
       ![CreateRestAPI](/images/temp/1/92.png?width=90pc)
 
-2. Mở **package.json** trong thư mục **fcj-serverless-frontend** đã tải xuống từ phần 2.
-    - Thay đổi giá trị của **"proxy"** thành URL Invoke của API gateway của bạn.
-    > Đảm bảo bạn làm theo mẫu URL như dưới đây.
-
-      ![CreateRestAPI](/images/temp/1/103.png?width=90pc)
-
-3. Mở **App.js** trong **fcj-serverless-frontend/src/**, thay đổi giá trị của **isAdmin** thành **true**.
+2. Mở **App.js** trong **fcj-serverless-frontend/src/**, thay đổi giá trị của **isAdmin** thành **true**.
     ![CreateRestAPI](/images/temp/1/93.png?width=90pc)
 
-4. Chạy các lệnh dưới đây trong terminal của bạn.
+3. Chạy các lệnh dưới đây trong terminal của bạn.
 
     ```bash
     yarn build
@@ -29,11 +23,11 @@ Sau khi kiểm tra rằng các API hoạt động đúng với Postman, chúng t
     aws s3 cp build s3://fcj-book-shop-by-myself --recursive
     ```
 
-5. Dán endpoint của S3 static web vào trình duyệt của bạn. Ứng dụng đã hiển thị thông tin sách, nhưng vẫn chưa có hình ảnh vì chúng ta chưa tải lên hình ảnh.
+4. Dán endpoint của S3 static web vào trình duyệt của bạn. Ứng dụng đã hiển thị thông tin sách, nhưng vẫn chưa có hình ảnh vì chúng ta chưa tải lên hình ảnh.
     ![CreateRestAPI](/images/temp/1/94.png?width=90pc)
 Vì vậy, API liệt kê đang hoạt động đúng.
 
-6. Kiểm tra API ghi.
+5. Kiểm tra API ghi.
     - Nhấp vào tab **Management**.
     - Nhấp vào **Update**.
       ![CreateRestAPI](/images/temp/1/95.png?width=90pc)
@@ -63,7 +57,7 @@ Vì vậy, API liệt kê đang hoạt động đúng.
     - Hiển thị thông tin mới tạo.
       ![CreateRestAPI](/images/temp/1/99.png?width=90pc)
 
-7. Kiểm tra API xóa.
+6. Kiểm tra API xóa.
     - Nhấp vào tab **Management**.
     - Nhấp vào **Update**.
       ![CreateRestAPI](/images/temp/1/100.png?width=90pc)

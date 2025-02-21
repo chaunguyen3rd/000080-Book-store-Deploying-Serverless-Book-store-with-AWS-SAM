@@ -8,7 +8,7 @@ pre : " <b> 4.4. </b> "
 1. Mở tệp **template.yaml** trong thư mục **fcj-book-shop**.
 
 2. Thêm đoạn mã sau vào cuối tệp để tạo phương thức **DELETE**.
-    - Đầu tiên, chúng ta cần làm mới để tạo phiên bản triển khai mới cho **POST** Api trong vài bước tiếp theo. Bình luận khối **BookApiDeployment**.
+    - Đầu tiên, chúng ta cần làm mới để tạo phiên bản triển khai mới cho **POST** Api trong một vài bước tiếp theo. Bình luận khối **BookApiDeployment**.
 
       ```yml
       # BookApiDeployment:
@@ -51,18 +51,36 @@ pre : " <b> 4.4. </b> "
             IntegrationHttpMethod: POST # For Lambda integrations, you must set the integration method to POST
             Uri: !Sub >-
               arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${BookDelete.Arn}/invocations
+          MethodResponses:
+            - StatusCode: "200"
+              ResponseParameters:
+                method.response.header.Access-Control-Allow-Origin: true
+                method.response.header.Access-Control-Allow-Methods: true
+                method.response.header.Access-Control-Allow-Headers: true
+
+      BookApiDeleteOptions:
+        Type: AWS::ApiGateway::Method
+        Properties:
+          HttpMethod: OPTIONS
+          RestApiId: !Ref BookApi
+          ResourceId: !Ref BookDeleteApiResource
+          AuthorizationType: NONE
+          Integration:
+            Type: MOCK
+            RequestTemplates:
+              application/json: '{"statusCode": 200}'
             IntegrationResponses:
               - StatusCode: "200"
                 ResponseParameters:
                   method.response.header.Access-Control-Allow-Origin: "'*'"
-                  method.response.header.Access-Control-Allow-Methods: "'DELETE,OPTIONS'"
+                  method.response.header.Access-Control-Allow-Methods: "'GET,POST,OPTIONS,DELETE'"
                   method.response.header.Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'"
           MethodResponses:
             - StatusCode: "200"
               ResponseParameters:
-                method.response.header.Access-Control-Allow-Origin: "'*'"
-                method.response.header.Access-Control-Allow-Methods: "'DELETE,OPTIONS'"
-                method.response.header.Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'"
+                method.response.header.Access-Control-Allow-Origin: true
+                method.response.header.Access-Control-Allow-Methods: true
+                method.response.header.Access-Control-Allow-Headers: true
 
       BookApiDeleteInvokePermission:
         Type: AWS::Lambda::Permission
@@ -74,7 +92,7 @@ pre : " <b> 4.4. </b> "
       ```
 
       ![CreateDeleteAPI](/images/temp/1/79.png?&width=90pc)
-    - Sau đó, chúng ta bỏ ghi chú khối mã mà chúng ta đã ghi chú ở trên.
+    - Sau đó, chúng ta bỏ bình luận khối mã mà chúng ta đã bình luận ở trên.
 
       ```yml
       BookApiDeployment:
@@ -107,7 +125,7 @@ pre : " <b> 4.4. </b> "
     ![CreateDeleteAPI](/images/temp/1/81.png?&width=90pc)
 
 4. Mở [AWS API Gateway console](https://us-east-1.console.aws.amazon.com/apigateway/home?region=us-east-1).
-    - Nhấp vào **fcj-serverless-api** REST api.
+    - Nhấp vào REST api **fcj-serverless-api**.
       ![CreateDeleteAPI](/images/temp/1/64.png?width=90pc)
     - Tại trang tài nguyên **fcj-serverless-api**.
       - Nhấp vào **Resources**.
